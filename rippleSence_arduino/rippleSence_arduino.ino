@@ -1,10 +1,16 @@
+#include <dht.h>
+
+
+
 
 
 int tx=1;
 int rx=0;
 char inSerial[15];
-#define echoPin 7 // Echo Pin
-#define trigPin 8 // Trigger Pin
+dht DHT;
+#define DHT11_PIN 4
+#define echoPin 2 // Echo Pin
+#define trigPin 3 // Trigger Pin
 int maximumRange = 350; // Maximum range needed
 int minimumRange = 0; // Minimum range needed
 long duration, distance; // Duration used to calculate distance
@@ -70,7 +76,27 @@ void Check_Protocol(char inStr[]){
 
     for(m=0;m<11;m++){
       inStr[m]=0;}
-       i=0;}
+       i=0;
+       }
+       else if(!strcmp(inStr,"dht")){  
+
+         Serial.print("DHT11, \n");
+  int chk = DHT.read11(DHT11_PIN);
+  
+  // display current sensor readings
+  Serial.print("Humidity is:");
+  Serial.print(DHT.humidity, 1);
+  Serial.print("\n Temperature is:");
+  Serial.println(DHT.temperature, 1);
+  
+
+  delay(2000);
+        
+        
+        
+        
+        
+        }
        
     else{
     for(m=0;m<11;m++){
