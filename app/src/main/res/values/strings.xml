@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ProgProj</string>
+    <string name="app_name">RippleSense</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -7,6 +7,10 @@
     <string name="action_settings">Settings</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Home Fragment</string>
-    <string name="hello_detail_fragment">Add Ripple Fragment</string>
+    <string name="hello_blank_fragment">This is the Home Screen Fragment</string>
+    <string name="hello_detail_fragment">This is the Add Ripple Fragment</string>
+    <string name="hello_settings_fragment">Settings</string>
+
+    <string name="title_activity_farm">My Farms</string>
+    <string name="title_activity_add_farm">New Farm</string>
 </resources>
