@@ -46,14 +46,12 @@ void loop(){
 void Check_Protocol(char inStr[]){   
   int i=0;
   int m=0;
-  Serial.println(inStr);
+  
   
  
    
    if(!strcmp(inStr,"ripple")){      //sensor on 
-    int done =0;
-    Serial.println("sensor on, reading values");
-    while (done < 15){
+    
     
      digitalWrite(trigPin, LOW); 
      delayMicroseconds(2); 
@@ -64,29 +62,25 @@ void Check_Protocol(char inStr[]){
      digitalWrite(trigPin, LOW);
      duration = pulseIn(echoPin, HIGH);
      distance = duration/58.2;
-     if(distance > maximumRange || distance < minimumRange){
-      Serial.println("out of range");
-     }
-     else{
+     
      
      Serial.println(distance);
-     done++;
-     }
-    }
-
-    for(m=0;m<11;m++){
+     
+      for(m=0;m<11;m++){
       inStr[m]=0;}
        i=0;
        }
+    
+
+
+   
        else if(!strcmp(inStr,"dht")){  
 
-         Serial.print("DHT11, \n");
+         
   int chk = DHT.read11(DHT11_PIN);
   
   // display current sensor readings
-  Serial.print("Humidity is:");
-  Serial.print(DHT.humidity, 1);
-  Serial.print("\n Temperature is:");
+  
   Serial.println(DHT.temperature, 1);
   
 
