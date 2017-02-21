@@ -25,4 +25,14 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:hint="Enter the Farm Name" />
+
+    <ImageButton
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srcCompat="@drawable/ic_menu_camera"
+        android:layout_below="@+id/editText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="47dp"
+        android:onClick="onSelectImage"
+        android:id="@+id/imageButton" />
 </RelativeLayout>

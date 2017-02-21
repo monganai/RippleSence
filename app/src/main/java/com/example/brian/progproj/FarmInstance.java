@@ -18,6 +18,11 @@ public class FarmInstance {
         ripples = new ArrayList<>();
     }
 
+    public FarmInstance(String farmName){
+        name = farmName;
+        ripples = new ArrayList<>();
+    }
+
     public Bitmap getImage(){
         return image;
     }

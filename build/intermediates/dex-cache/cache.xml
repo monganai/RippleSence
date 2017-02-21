@@ -66,6 +66,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\brian\progproj\Ripple\app\build\intermediates\exploded-aar\com.mikhaellopez\circularimageview\3.0.2\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="a8340f8c17337c864648c13abe1416d34c80ec14">
+        <dex dex="C:\Users\brian\progproj\Ripple\app\build\intermediates\pre-dexed\debug\com.mikhaellopez-circularimageview-3.0.2_017146877a12cda66241f0d61419d081dd43a2a7.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\brian\AndroidStudioProjects\ProgProj\app\build\intermediates\exploded-aar\com.android.support\design\25.1.0\jars\classes.jar"
         jumboMode="false"
         optimize="true"
@@ -180,6 +189,15 @@
         revision="25.0.2"
         sha1="2a53c4f3518116b8c6aee0e477233f0f7da8616f">
         <dex dex="C:\Users\brian\progproj\Ripple\app\build\intermediates\pre-dexed\debug\com.android.support-support-fragment-25.1.0_50b6bd0b51a98fbd322e67106d2bf6e994993ce8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\brian\progproj\Ripple\app\build\intermediates\exploded-aar\com.github.Mariovc\ImagePicker\1.0.5\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="03555acd8e01e35485291e3ba2515449812a452d">
+        <dex dex="C:\Users\brian\progproj\Ripple\app\build\intermediates\pre-dexed\debug\com.github.Mariovc-ImagePicker-1.0.5_8bfe8c88482ee14f7e3bbcbb449ebaf2fb851344.jar" />
     </item>
     <item
         is-multidex="false"

@@ -1,0 +1,27 @@
+<com.example.brian.progproj.GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="5dp">
+
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:layout_width="100dp"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        app:civ_border_color="@color/colorPrimaryDark"
+        app:civ_border_width="4dp"
+        android:id="@+id/grid_image"/>
+
+    <TextView
+    android:id="@+id/grid_text"
+    android:layout_width="100dp"
+    android:layout_height="30dp"
+    android:layout_weight="1"
+        android:gravity="center_horizontal"
+    android:textSize="15sp" >
+    </TextView>
+
+    </com.example.brian.progproj.GridLayout>
