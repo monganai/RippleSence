@@ -18,9 +18,9 @@
 
         </activity>
         <activity
+            android:theme="@style/splashScreenTheme"
             android:name=".FarmActivity"
-            android:label="@string/title_activity_farm"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="@string/title_activity_farm">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

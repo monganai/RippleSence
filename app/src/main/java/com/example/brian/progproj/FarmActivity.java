@@ -1,13 +1,16 @@
 package com.example.brian.progproj;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ListView;
@@ -18,7 +21,7 @@ import com.google.gson.JsonElement;
 import java.util.ArrayList;
 
 
-public class FarmActivity extends AppCompatActivity {
+public class FarmActivity extends Activity {
 
     static final int ADD_FARM_REQUEST = 1;
 
@@ -26,10 +29,13 @@ public class FarmActivity extends AppCompatActivity {
     FarmGridAdapter arrayAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_farm);
+        View root = ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
+        root.setBackgroundColor(Color.WHITE);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //setSupportActionBar(toolbar);
         GridView list = (GridView) findViewById(R.id.farmList);
         list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         TinyDB db = new TinyDB(this.getApplicationContext());
