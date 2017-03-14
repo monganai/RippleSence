@@ -56,7 +56,7 @@ public class FarmGridAdapter extends BaseAdapter {
         imageView.setImageBitmap(getItem(position).getImage());
         imageView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, RippleActivity.class);
+                Intent intent = new Intent(mContext, singleRippleGraph.class);
                 mContext.startActivity(intent);
             }
         });

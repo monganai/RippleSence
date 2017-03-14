@@ -38,7 +38,8 @@
         <activity
             android:name=".AddRippleActivity"
             android:label="@string/title_activity_add_ripple"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".singleRippleGraph"></activity>
     </application>
 
 </manifest>
