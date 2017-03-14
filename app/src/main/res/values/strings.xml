@@ -11,6 +11,8 @@
     <string name="hello_detail_fragment">This is the Add Ripple Fragment</string>
     <string name="hello_settings_fragment">Settings</string>
 
-    <string name="title_activity_farm">My Farms</string>
+    <string name="title_activity_farm">RippleSense</string>
     <string name="title_activity_add_farm">New Farm</string>
+    <string name="title_activity_ripple">RippleActivity</string>
+    <string name="title_activity_add_ripple">AddRippleActivity</string>
 </resources>

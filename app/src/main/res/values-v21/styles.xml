@@ -1,5 +1,6 @@
 <resources>
     <color name="white">#FFFFFFFF</color>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -7,6 +8,7 @@
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
+
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="android:windowBackground">@color/white</item>
@@ -16,9 +18,8 @@
     </style>
 
 
-
     <style name="splashScreenTheme" parent="AppTheme.NoActionBar">
         <item name="android:windowBackground">@drawable/bg</item>
     </style>
-    
+
 </resources>

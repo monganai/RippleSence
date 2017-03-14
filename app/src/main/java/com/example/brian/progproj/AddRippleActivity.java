@@ -19,13 +19,13 @@ import com.mvc.imagepicker.ImagePicker;
 
 import java.util.ArrayList;
 
-public class AddFarmActivity extends AppCompatActivity {
+public class AddRippleActivity extends AppCompatActivity {
 
     Bitmap icon;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_farm);
+        setContentView(R.layout.activity_add_ripple);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ImagePicker.setMinQuality(600, 600);
@@ -43,7 +43,7 @@ public class AddFarmActivity extends AppCompatActivity {
         ImagePicker.pickImage(this, "Select your image:");
     }
     public void onClick(View view){
-        final AddFarmActivity activity = this;
+        final AddRippleActivity activity = this;
 
         EditText textbox = (EditText)findViewById(R.id.editText);
         if(textbox.getText().length() == 0){
@@ -56,16 +56,16 @@ public class AddFarmActivity extends AppCompatActivity {
         }
         TinyDB db = new TinyDB(this.getApplicationContext());
         if(db.getString(textbox.getText().toString()) != null){
-            Snackbar.make(findViewById(android.R.id.content), "A Farm with this name already exists!", Snackbar.LENGTH_LONG).setDuration(1800).show();
+            Snackbar.make(findViewById(android.R.id.content), "A Ripple with this name already exists!", Snackbar.LENGTH_LONG).setDuration(1800).show();
             return;
         }
         ArrayList<String> farms = new ArrayList<>();
-        if(db.getListString("Farms") != null){
-            farms = db.getListString("Farms");
+        if(db.getListString("Ripples") != null){
+            farms = db.getListString("Ripples");
         }
         String farmName = textbox.getText().toString();
         farms.add(farmName);
-        db.putListString("Farms", farms);
+        db.putListString("Ripples", farms);
         String path = db.putImage(this.getApplicationContext().getApplicationInfo().dataDir, farmName + ".png", icon);
         db.putString(farmName, path);
         setResult(RESULT_OK);
