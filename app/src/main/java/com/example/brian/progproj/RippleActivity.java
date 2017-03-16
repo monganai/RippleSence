@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.PointF;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -42,7 +43,6 @@ public class RippleActivity extends Activity {
 
 
 
-
         if(b != null){
             parentFarm = b.getString("farm");
         }
@@ -69,6 +69,96 @@ public class RippleActivity extends Activity {
                 farms);
         list.setAdapter(arrayAdapter);
 
+
+        DecoView decoView = (DecoView) findViewById(R.id.dynamicArcView2);
+
+        final SeriesItem seriesItem = new SeriesItem.Builder(Color.BLUE)
+                .setRange(0, 100, 0)
+                .setInset(new PointF(50f, 50f))
+                .setInitialVisibility(false)
+                .setLineWidth(75)
+                .build();
+
+
+
+
+        final SeriesItem seriesItem2 = new SeriesItem.Builder(Color.BLUE)
+                .setRange(0, 100, 0)
+                .setInset(new PointF(125f, 125f))
+                .setInitialVisibility(false)
+                .setLineWidth(75)
+                .build();
+
+
+
+
+        final SeriesItem seriesItem3 = new SeriesItem.Builder(Color.BLUE)
+                .setRange(0, 100, 0)
+                .setInset(new PointF(200f, 200f))
+                .setInitialVisibility(false)
+                .setLineWidth(75)
+                .build();
+
+
+
+
+        final SeriesItem seriesItem4 = new SeriesItem.Builder(Color.BLUE)
+                .setRange(0, 100, 0)
+                .setInset(new PointF(275f, 275f))
+                .setInitialVisibility(false)
+                .setLineWidth(75)
+                .build();
+
+
+        int series1Index = decoView.addSeries(seriesItem);
+        int series2Index = decoView.addSeries(seriesItem2);
+        int series3Index = decoView.addSeries(seriesItem3);
+        int series4Index = decoView.addSeries(seriesItem4);
+
+
+
+        decoView.addEvent(new DecoEvent.Builder(80)
+                .setIndex(series1Index)
+                .setDelay(1000)
+                .build());
+
+        decoView.addEvent(new DecoEvent.Builder(70)
+                .setIndex(series2Index)
+                .setDelay(1000)
+                .build());
+
+        decoView.addEvent(new DecoEvent.Builder(60)
+                .setIndex(series3Index)
+                .setDelay(1000)
+                .build());
+
+        decoView.addEvent(new DecoEvent.Builder(90)
+                .setIndex(series4Index)
+                .setDelay(1000)
+                .build());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
     protected void onResume(){
@@ -88,6 +178,7 @@ public class RippleActivity extends Activity {
         GridView list = (GridView) findViewById(R.id.farmList);
         list.setAdapter(arrayAdapter);
         arrayAdapter.notifyDataSetChanged();
+
 
 
     }
