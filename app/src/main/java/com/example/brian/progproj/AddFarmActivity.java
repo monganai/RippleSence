@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.mikhaellopez.circularimageview.CircularImageView;
 import com.mvc.imagepicker.ImagePicker;
 
 import java.util.ArrayList;
@@ -35,8 +36,9 @@ public class AddFarmActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         icon = ImagePicker.getImageFromResult(this, requestCode, resultCode, data);
-        ImageButton view = (ImageButton)findViewById(R.id.imageButton);
-        view.setImageBitmap(icon);
+        CircularImageView view = (CircularImageView) findViewById(R.id.imageButton);
+        if(icon != null)
+            view.setImageBitmap(icon);
     }
 
     public void onSelectImage(View view){
@@ -66,8 +68,10 @@ public class AddFarmActivity extends AppCompatActivity {
         String farmName = textbox.getText().toString();
         farms.add(farmName);
         db.putListString("Farms", farms);
-        String path = db.putImage(this.getApplicationContext().getApplicationInfo().dataDir, farmName + ".png", icon);
-        db.putString(farmName, path);
+        new ImageSaver(this.getApplicationContext()).
+                setFileName(farmName + ".png").
+                setDirectoryName("farms").
+                save(icon);
         setResult(RESULT_OK);
         finish();
     }

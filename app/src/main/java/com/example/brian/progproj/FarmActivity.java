@@ -1,6 +1,7 @@
 package com.example.brian.progproj;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -43,7 +44,11 @@ public class FarmActivity extends Activity {
        // Snackbar.make(findViewById(android.R.id.content), strings.get(0), Snackbar.LENGTH_LONG).setDuration(1800).show();
 
         for(String s : strings){
-            farms.add(new FarmInstance(s, db.getImage(db.getString(s))));
+            Bitmap bitmap = new ImageSaver(this.getApplicationContext()).
+                    setFileName(s + ".png").
+                    setDirectoryName("farms").
+                    load();
+            farms.add(new FarmInstance(s, bitmap));
         }
         arrayAdapter = new FarmGridAdapter(
                 this,
@@ -58,7 +63,11 @@ public class FarmActivity extends Activity {
         farms.clear();
         ArrayList<String> strings = db.getListString("Farms");
         for(String s : strings){
-            farms.add(new FarmInstance(s, db.getImage(db.getString(s))));
+            Bitmap bitmap = new ImageSaver(this.getApplicationContext()).
+                    setFileName(s + ".png").
+                    setDirectoryName("farms").
+                    load();
+            farms.add(new FarmInstance(s, bitmap));
         }
         arrayAdapter = new FarmGridAdapter(
                 this,
@@ -80,7 +89,11 @@ public class FarmActivity extends Activity {
                 ArrayList<String> strings = db.getListString("Farms");
                 farms.clear();
                 for(String s : strings){
-                    farms.add(new FarmInstance(s, db.getImage(db.getString(s))));
+                    Bitmap bitmap = new ImageSaver(this.getApplicationContext()).
+                            setFileName(s + ".png").
+                            setDirectoryName("farms").
+                            load();
+                    farms.add(new FarmInstance(s, bitmap));
                 }
                 arrayAdapter.notifyDataSetChanged();
             }
