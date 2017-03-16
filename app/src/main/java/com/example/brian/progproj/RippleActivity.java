@@ -25,12 +25,17 @@ public class RippleActivity extends Activity {
 
     static final int ADD_RIPPLE_REQUEST = 1;
 
-    ArrayList<FarmInstance> farms = new ArrayList<>();
-    FarmGridAdapter arrayAdapter;
+    ArrayList<RippleInstance> farms = new ArrayList<>();
+    RippleGridAdapter arrayAdapter;
+    String parentFarm = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
+        Bundle b = getIntent().getExtras();
+        if(b != null){
+            parentFarm = b.getString("farm");
+        }
         setContentView(R.layout.activity_ripple);
         View root = ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
         root.setBackgroundColor(Color.WHITE);
@@ -39,13 +44,17 @@ public class RippleActivity extends Activity {
         GridView list = (GridView) findViewById(R.id.farmList);
         list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         TinyDB db = new TinyDB(this.getApplicationContext());
-        ArrayList<String> strings = db.getListString("Ripples");
+        ArrayList<String> strings = db.getListString(parentFarm + "_ripple");
         // Snackbar.make(findViewById(android.R.id.content), strings.get(0), Snackbar.LENGTH_LONG).setDuration(1800).show();
 
         for(String s : strings){
-            farms.add(new FarmInstance(s, db.getImage(db.getString(s))));
+            Bitmap bitmap = new ImageSaver(this.getApplicationContext()).
+                    setFileName(s + ".png").
+                    setDirectoryName(parentFarm + "_ripple").
+                    load();
+            farms.add(new RippleInstance(s, bitmap));
         }
-        arrayAdapter = new FarmGridAdapter(
+        arrayAdapter = new RippleGridAdapter(
                 this,
                 farms);
         list.setAdapter(arrayAdapter);
@@ -56,11 +65,14 @@ public class RippleActivity extends Activity {
         super.onResume();
         TinyDB db = new TinyDB(this.getApplicationContext());
         farms.clear();
-        ArrayList<String> strings = db.getListString("Ripples");
+        ArrayList<String> strings = db.getListString(parentFarm + "_ripple");
         for(String s : strings){
-            farms.add(new FarmInstance(s, db.getImage(db.getString(s))));
-        }
-        arrayAdapter = new FarmGridAdapter(
+            Bitmap bitmap = new ImageSaver(this.getApplicationContext()).
+                    setFileName(s + ".png").
+                    setDirectoryName(parentFarm + "_ripple").
+                    load();
+            farms.add(new RippleInstance(s, bitmap));}
+        arrayAdapter = new RippleGridAdapter(
                 this,
                 farms);
         GridView list = (GridView) findViewById(R.id.farmList);
@@ -77,11 +89,14 @@ public class RippleActivity extends Activity {
             if (resultCode == RESULT_OK) {
                 Snackbar.make(findViewById(android.R.id.content), "Device Added!" , Snackbar.LENGTH_LONG).setDuration(1800).show();
                 TinyDB db = new TinyDB(this.getApplicationContext());
-                ArrayList<String> strings = db.getListString("Ripples");
+                ArrayList<String> strings = db.getListString(parentFarm + "_ripple");
                 farms.clear();
                 for(String s : strings){
-                    farms.add(new FarmInstance(s, db.getImage(db.getString(s))));
-                }
+                    Bitmap bitmap = new ImageSaver(this.getApplicationContext()).
+                            setFileName(s + ".png").
+                            setDirectoryName(parentFarm + "_ripple").
+                            load();
+                    farms.add(new RippleInstance(s, bitmap)); }
                 arrayAdapter.notifyDataSetChanged();
             }
         }
@@ -89,6 +104,7 @@ public class RippleActivity extends Activity {
 
     public void onClick(View view){
         Intent intent = new Intent(this, AddRippleActivity.class);
+        intent.putExtra("farm", parentFarm);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         startActivityForResult(intent, ADD_RIPPLE_REQUEST);
     }

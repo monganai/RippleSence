@@ -54,9 +54,11 @@ public class FarmGridAdapter extends BaseAdapter {
         textView.setText(getItem(position).getName());
         CircularImageView imageView = (CircularImageView) grid.findViewById(R.id.grid_image);
         imageView.setImageBitmap(getItem(position).getImage());
+        final String name = getItem(position).getName();
         imageView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, singleRippleGraph.class);
+                Intent intent = new Intent(mContext, RippleActivity.class);
+                intent.putExtra("farm", name);
                 mContext.startActivity(intent);
             }
         });

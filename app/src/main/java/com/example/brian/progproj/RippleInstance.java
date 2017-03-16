@@ -10,11 +10,25 @@ import java.util.ArrayList;
 
 public class RippleInstance {
     String name;
-    String macAddress;
+    Bitmap image;
+    String address = "98:D3:31:FB:1F:75";
 
-    public RippleInstance(String rippleName, String mac){
-        name = rippleName;
-        macAddress = mac;
+    public RippleInstance(String farmName, Bitmap icon){
+        name = farmName;
+        image = icon;
+    }
+
+    public RippleInstance(String farmName){
+        name = farmName;
+    }
+
+    public String getAddress() {return address;}
+    public Bitmap getImage(){
+        return image;
+    }
+
+    public void setImage(Bitmap icon){
+        image = icon;
     }
 
     public String getName(){
@@ -24,13 +38,4 @@ public class RippleInstance {
     public void setName(String farm){
         name = farm;
     }
-
-    public String getMacAddress(){
-        return macAddress;
-    }
-
-    public void setMacAddress(String mac){
-        macAddress = mac;
-    }
-
 }

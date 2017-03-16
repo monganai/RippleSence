@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.mikhaellopez.circularimageview.CircularImageView;
 import com.mvc.imagepicker.ImagePicker;
 
 import java.util.ArrayList;
@@ -22,20 +23,23 @@ import java.util.ArrayList;
 public class AddRippleActivity extends AppCompatActivity {
 
     Bitmap icon;
+    String parentFarm = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle b = getIntent().getExtras();
+        if(b != null)
+            parentFarm = b.getString("farm");
         setContentView(R.layout.activity_add_ripple);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ImagePicker.setMinQuality(600, 600);
-
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         icon = ImagePicker.getImageFromResult(this, requestCode, resultCode, data);
-        ImageButton view = (ImageButton)findViewById(R.id.imageButton);
+        CircularImageView view = (CircularImageView) findViewById(R.id.imageButton);
         view.setImageBitmap(icon);
     }
 
@@ -60,14 +64,16 @@ public class AddRippleActivity extends AppCompatActivity {
             return;
         }
         ArrayList<String> farms = new ArrayList<>();
-        if(db.getListString("Ripples") != null){
-            farms = db.getListString("Ripples");
+        if(db.getListString(parentFarm + "_ripple") != null){
+            farms = db.getListString(parentFarm + "_ripple");
         }
         String farmName = textbox.getText().toString();
         farms.add(farmName);
-        db.putListString("Ripples", farms);
-        String path = db.putImage(this.getApplicationContext().getApplicationInfo().dataDir, farmName + ".png", icon);
-        db.putString(farmName, path);
+        db.putListString(parentFarm + "_ripple", farms);
+        new ImageSaver(this.getApplicationContext()).
+                setFileName(farmName + ".png").
+                setDirectoryName(parentFarm + "_ripple").
+                save(icon);
         setResult(RESULT_OK);
         finish();
     }

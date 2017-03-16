@@ -1,6 +1,7 @@
 package com.example.brian.progproj;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +17,9 @@ import java.util.ArrayList;
 
 public class RippleGridAdapter extends BaseAdapter {
     private Context mContext;
-    private ArrayList<FarmInstance> data;
+    private ArrayList<RippleInstance> data;
 
-    public RippleGridAdapter(Context c, ArrayList<FarmInstance> array) {
+    public RippleGridAdapter(Context c, ArrayList<RippleInstance> array) {
         mContext = c;
         data = array;
     }
@@ -29,7 +30,7 @@ public class RippleGridAdapter extends BaseAdapter {
     }
 
     @Override
-    public FarmInstance getItem(int position) {
+    public RippleInstance getItem(int position) {
         return data.get(position);
     }
 
@@ -53,7 +54,14 @@ public class RippleGridAdapter extends BaseAdapter {
         textView.setText(getItem(position).getName());
         CircularImageView imageView = (CircularImageView) grid.findViewById(R.id.grid_image);
         imageView.setImageBitmap(getItem(position).getImage());
-
+        final String address = getItem(position).getAddress();
+        imageView.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, singleRippleGraph.class);
+                intent.putExtra("macAddress", address);
+                mContext.startActivity(intent);
+            }
+        });
         return grid;
     }
 
