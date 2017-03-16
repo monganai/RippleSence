@@ -18,6 +18,9 @@ import android.widget.ListView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.hookedonplay.decoviewlib.DecoView;
+import com.hookedonplay.decoviewlib.charts.SeriesItem;
+import com.hookedonplay.decoviewlib.events.DecoEvent;
 
 import java.util.ArrayList;
 
@@ -33,6 +36,29 @@ public class FarmActivity extends Activity {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_farm);
+
+
+DecoView decoView;
+
+        decoView = (DecoView) findViewById(R.id.dynamicArcView2);
+
+        SeriesItem item = new SeriesItem.Builder(Color.BLUE).setRange(0, 3500, 0).build();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         View root = ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
         root.setBackgroundColor(Color.WHITE);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -54,6 +80,24 @@ public class FarmActivity extends Activity {
                 this,
                 farms);
         list.setAdapter(arrayAdapter);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     }
 

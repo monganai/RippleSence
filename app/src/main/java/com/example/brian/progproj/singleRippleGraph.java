@@ -5,6 +5,9 @@ import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -30,6 +33,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +44,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 import com.hookedonplay.decoviewlib.DecoView;
 import com.hookedonplay.decoviewlib.charts.SeriesItem;
+import com.hookedonplay.decoviewlib.charts.SeriesLabel;
 import com.hookedonplay.decoviewlib.events.DecoEvent;
 import menu.BlankFragment;
 import menu.DetailFragment;
@@ -52,7 +57,7 @@ float ANS =0;
     private static final String TAG = "ripplesence";
 
     Button ripple;
-    // TextView txtArduino;
+
     Handler h;
 
     final int RECIEVE_MESSAGE = 1;        // Status  for Handler
@@ -84,8 +89,12 @@ float ANS =0;
 
         decoView = (DecoView) findViewById(R.id.dynamicArcView);
 
-        final SeriesItem seriesItem = new SeriesItem.Builder(Color.BLUE)
+        final SeriesItem seriesItem = new SeriesItem.Builder((Color.parseColor("#039CD5")))
                 .setRange(0, 3500, 0)
+                .setInterpolator(new AccelerateInterpolator())
+                .setInitialVisibility(false)
+                .setLineWidth(75)
+
                 .build();
 
         int series1Index = decoView.addSeries(seriesItem);
@@ -124,47 +133,15 @@ float answer;
                 .setDelay(1000)
                 .build());
 
-        decoView.addEvent(new DecoEvent.Builder(ANS)
+        decoView.addEvent(new DecoEvent.Builder(2000)
                 .setIndex(series1Index)
                 .setDelay(1000)
                 .build());
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   // DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-    //ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-         //   this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-    //drawer.setDrawerListener(toggle);
-   // toggle.syncState();
-
-  //  NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
- //   navigationView.setNavigationItemSelectedListener(this);
-
-  //  setContentView(R.layout.activity_main2);
-
     ripple = (Button) findViewById(R.id.ripple);                    // button LED ON
-    //btnOff = (Button) findViewById(R.id.btnOff);                   // button LED OFF
-    //  humid = (Button) findViewById(R.id.humid);
-    // txtArduino = (TextView) findViewById(R.id.txtArduino);        // for display the received data from the Arduino
+
 
     h = new Handler() {
         public void handleMessage(android.os.Message msg) {
@@ -181,7 +158,7 @@ float answer;
                         float ans = (float) foo;
 
                         final SeriesItem seriesItem = new SeriesItem.Builder(Color.RED)
-                                .setRange(0, 200, 0)
+                                .setRange(0, 350, 0)
                                 .build();
 
                         int series1Index = decoView.addSeries(seriesItem);
@@ -207,10 +184,69 @@ float answer;
                                 .setDelay(1000)
                                 .build());
 
-                        textPercentage.setText("D" + ans);// update TextView
-                        // btnOff.setEnabled(true);
-                        //  btnOn.setEnabled(true);
-                        //humid.setEnabled(true);
+
+
+
+                        String s;
+                        SpannableString ss1;
+                        TextView tv;
+
+
+
+
+                        if(ANS > 40) {
+
+                            s = "Everything is ok!";
+                            ss1 = new SpannableString(s);
+                            ss1.setSpan(new RelativeSizeSpan(2f), 0, 17, 0); // set size
+                            ss1.setSpan(new ForegroundColorSpan(Color.BLUE), 0, 17, 0);// set color
+                            tv = (TextView) findViewById(R.id.textPercentage);
+                            tv.setText(ss1);
+                        }
+                        else if(ANS < 40) {
+
+
+                            s = "Level Low!";
+                            ss1 = new SpannableString(s);
+                            ss1.setSpan(new RelativeSizeSpan(2f), 0, 10, 0); // set size
+                            ss1.setSpan(new ForegroundColorSpan(Color.BLUE), 0, 10, 0);// set color
+                            tv = (TextView) findViewById(R.id.textPercentage);
+                            tv.setText(ss1);
+                        }
+                        else if(ANS < 10) {
+
+
+                            s = "Level is Critical";
+                            ss1 = new SpannableString(s);
+                            ss1.setSpan(new RelativeSizeSpan(2f), 0, 17, 0); // set size
+                            ss1.setSpan(new ForegroundColorSpan(Color.RED), 0, 17, 0);// set color
+                            tv = (TextView) findViewById(R.id.textPercentage);
+                            tv.setText(ss1);
+                        }
+
+                        if (ANS<4) {
+                            s = "Temperature is below 0";
+                            ss1 = new SpannableString(s);
+                            ss1.setSpan(new RelativeSizeSpan(2f), 0, 14, 0); // set size
+                            ss1.setSpan(new ForegroundColorSpan(Color.RED), 0, 14, 0);// set color
+                            tv = (TextView) findViewById(R.id.textPercentage);
+                            tv.setText(ss1);
+                        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+                      //  textPercentage.setText("D" + ans);// update TextView
+
                         ripple.setEnabled(true);
                     }
                     //Log.d(TAG, "...String:"+ sb.toString() +  "Byte:" + msg.arg1 + "...");
@@ -232,22 +268,7 @@ float answer;
             }
         });
 
-      /*  btnOff.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                btnOff.setEnabled(false);
-                mConnectedThread.write("temp");    // Send "0" via Bluetooth
-                //Toast.makeText(getBaseContext(), "Turn off LED", Toast.LENGTH_SHORT).show();
-            }
-        });
 
-        humid.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                btnOff.setEnabled(false);
-                mConnectedThread.write("humid");    // Send "0" via Bluetooth
-                //Toast.makeText(getBaseContext(), "Turn off LED", Toast.LENGTH_SHORT).show();
-            }
-        });
-*/
 
 }
 

@@ -17,11 +17,15 @@ import android.widget.ListView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.hookedonplay.decoviewlib.DecoView;
+import com.hookedonplay.decoviewlib.charts.SeriesItem;
+import com.hookedonplay.decoviewlib.events.DecoEvent;
 
 import java.util.ArrayList;
 
 
 public class RippleActivity extends Activity {
+
 
     static final int ADD_RIPPLE_REQUEST = 1;
 
@@ -33,6 +37,12 @@ public class RippleActivity extends Activity {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         Bundle b = getIntent().getExtras();
+
+
+
+
+
+
         if(b != null){
             parentFarm = b.getString("farm");
         }
