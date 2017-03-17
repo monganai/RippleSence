@@ -72,7 +72,7 @@ public class RippleActivity extends Activity {
 
         DecoView decoView = (DecoView) findViewById(R.id.dynamicArcView2);
 
-        final SeriesItem seriesItem = new SeriesItem.Builder(Color.BLUE)
+        final SeriesItem seriesItem = new SeriesItem.Builder((Color.parseColor("#1BC2EE")))
                 .setRange(0, 100, 0)
                 .setInset(new PointF(50f, 50f))
                 .setInitialVisibility(false)
@@ -82,7 +82,7 @@ public class RippleActivity extends Activity {
 
 
 
-        final SeriesItem seriesItem2 = new SeriesItem.Builder(Color.BLUE)
+        final SeriesItem seriesItem2 = new SeriesItem.Builder((Color.parseColor("#039CD5")))
                 .setRange(0, 100, 0)
                 .setInset(new PointF(125f, 125f))
                 .setInitialVisibility(false)
@@ -92,7 +92,7 @@ public class RippleActivity extends Activity {
 
 
 
-        final SeriesItem seriesItem3 = new SeriesItem.Builder(Color.BLUE)
+        final SeriesItem seriesItem3 = new SeriesItem.Builder((Color.parseColor("#4075BB")))
                 .setRange(0, 100, 0)
                 .setInset(new PointF(200f, 200f))
                 .setInitialVisibility(false)
@@ -102,7 +102,7 @@ public class RippleActivity extends Activity {
 
 
 
-        final SeriesItem seriesItem4 = new SeriesItem.Builder(Color.BLUE)
+        final SeriesItem seriesItem4 = new SeriesItem.Builder((Color.parseColor("#21409A")))
                 .setRange(0, 100, 0)
                 .setInset(new PointF(275f, 275f))
                 .setInitialVisibility(false)
