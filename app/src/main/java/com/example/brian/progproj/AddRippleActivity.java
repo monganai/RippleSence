@@ -71,10 +71,6 @@ public class AddRippleActivity extends AppCompatActivity {
         String farmName = r.toString();
         farms.add(farmName);
         db.putListString(parentFarm + "_ripple", farms);
-        new ImageSaver(this.getApplicationContext()).
-                setFileName(r.getName() + ".png").
-                setDirectoryName(parentFarm + "_ripple").
-                save(Bitmap.createScaledBitmap(icon, 128, 128, false));
         setResult(RESULT_OK);
         finish();
     }

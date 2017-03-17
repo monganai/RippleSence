@@ -69,11 +69,6 @@ public class RippleActivity extends Activity {
          **/
         for(String s : strings){ //parentFarm + ":" + r.getName() + ".png"
             RippleInstance r = new Gson().fromJson(s, RippleInstance.class);
-            /**Bitmap bitmap = new ImageSaver(this.getApplicationContext()).
-                    setFileName(r.getName() + ".png").
-                    setDirectoryName(parentFarm + "_ripple").
-                    load();
-            //r.setImage(bitmap);**/
             farms.add(r);
         }
         for(RippleInstance ri : farms){
@@ -182,11 +177,6 @@ public class RippleActivity extends Activity {
             farms.add(new RippleInstance(s, bitmap));}**/
         for(String s : strings){
             RippleInstance r = new Gson().fromJson(s, RippleInstance.class);
-/**            Bitmap bitmap = new ImageSaver(this.getApplicationContext()).
-                    setFileName(r.getName() + ".png").
-                    setDirectoryName(parentFarm + "_ripple").
-                    load();
-            //r.setImage(bitmap);**/
             farms.add(r);
         }
         arrayAdapter = new RippleGridAdapter(
@@ -217,11 +207,6 @@ public class RippleActivity extends Activity {
                  farms.add(new RippleInstance(s, bitmap));}**/
                 for(String s : strings){
                     RippleInstance r = new Gson().fromJson(s, RippleInstance.class);
-                    /**Bitmap bitmap = new ImageSaver(this.getApplicationContext()).
-                            setFileName(r.getName() + ".png").
-                            setDirectoryName(parentFarm + "_ripple").
-                            load();
-                   // r.setImage(bitmap);**/
                     farms.add(r);
                 }
                 arrayAdapter.notifyDataSetChanged();

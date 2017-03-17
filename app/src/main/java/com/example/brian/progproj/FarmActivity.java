@@ -55,11 +55,8 @@ DecoView decoView;
        // Snackbar.make(findViewById(android.R.id.content), strings.get(0), Snackbar.LENGTH_LONG).setDuration(1800).show();
 
         for(String s : strings){
-            Bitmap bitmap = Bitmap.createScaledBitmap(new ImageSaver(this.getApplicationContext()).
-                    setFileName(s + ".png").
-                    setDirectoryName("farms").
-                    load(), 128, 128, false);
-            farms.add(new FarmInstance(s, bitmap));
+            FarmInstance r = new Gson().fromJson(s, FarmInstance.class);
+            farms.add(r);
         }
         arrayAdapter = new FarmGridAdapter(
                 this,
@@ -76,11 +73,8 @@ DecoView decoView;
         farms.clear();
         ArrayList<String> strings = db.getListString("Farms");
         for(String s : strings){
-            Bitmap bitmap = new ImageSaver(this.getApplicationContext()).
-                    setFileName(s + ".png").
-                    setDirectoryName("farms").
-                    load();
-            farms.add(new FarmInstance(s, bitmap));
+            FarmInstance r = new Gson().fromJson(s, FarmInstance.class);
+            farms.add(r);
         }
         arrayAdapter = new FarmGridAdapter(
                 this,
@@ -102,11 +96,8 @@ DecoView decoView;
                 ArrayList<String> strings = db.getListString("Farms");
                 farms.clear();
                 for(String s : strings){
-                    Bitmap bitmap = new ImageSaver(this.getApplicationContext()).
-                            setFileName(s + ".png").
-                            setDirectoryName("farms").
-                            load();
-                    farms.add(new FarmInstance(s, bitmap));
+                    FarmInstance r = new Gson().fromJson(s, FarmInstance.class);
+                    farms.add(r);
                 }
                 arrayAdapter.notifyDataSetChanged();
             }
