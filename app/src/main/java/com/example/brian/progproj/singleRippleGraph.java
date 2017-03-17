@@ -1,5 +1,6 @@
 package com.example.brian.progproj;
 
+import android.graphics.PointF;
 import android.support.v4.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
@@ -49,6 +50,8 @@ import com.hookedonplay.decoviewlib.events.DecoEvent;
 import menu.BlankFragment;
 import menu.DetailFragment;
 
+import static android.R.attr.delay;
+
 public class singleRippleGraph extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -83,21 +86,31 @@ float ANS =0;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
+        String initial = "Tap Screen To Begin";
+        SpannableString ss;
+        TextView a;
 
+
+        ss = new SpannableString(initial);
+        ss.setSpan(new RelativeSizeSpan(2f), 0, 19, 0); // set size
+        ss.setSpan(new ForegroundColorSpan(Color.parseColor("#1BC2EE")), 0, 19, 0);// set color
+        a = (TextView) findViewById(R.id.textPercentage);
+        a.setText(ss);
 
 
 
         decoView = (DecoView) findViewById(R.id.dynamicArcView);
 
-        final SeriesItem seriesItem = new SeriesItem.Builder((Color.parseColor("#039CD5")))
-                .setRange(0, 3500, 0)
+        final SeriesItem seriesItem = new SeriesItem.Builder((Color.parseColor("#1BC2EE")))
+                .setRange(0, 350, 0)
+                .setInset(new PointF(50f, 50f))
                 .setInterpolator(new AccelerateInterpolator())
                 .setInitialVisibility(false)
                 .setLineWidth(75)
 
                 .build();
 
-        int series1Index = decoView.addSeries(seriesItem);
+
 
 
 
@@ -114,36 +127,30 @@ float ANS =0;
             @Override
             public void onSeriesItemDisplayProgress(float percentComplete) {
 
+
             }
+
+
+
+
+
+
+
+
+
         });
-float answer;
+            float answer;
         answer = ANS;
-        decoView.addEvent(new DecoEvent.Builder(16.3f)
-                .setIndex(series1Index)
-                .setDelay(1000)
-                .build());
-
-        decoView.addEvent(new DecoEvent.Builder(30f)
-                .setIndex(series1Index)
-                .setDelay(1000)
-                .build());
-
-        decoView.addEvent(new DecoEvent.Builder(46f)
-                .setIndex(series1Index)
-                .setDelay(1000)
-                .build());
-
-        decoView.addEvent(new DecoEvent.Builder(2000)
-                .setIndex(series1Index)
-                .setDelay(1000)
-                .build());
 
 
 
-    ripple = (Button) findViewById(R.id.ripple);                    // button LED ON
+
+       //  ripple = (Button) findViewById(R.id.ripple);                    // button LED ON
 
 
-    h = new Handler() {
+
+
+        h = new Handler() {
         public void handleMessage(android.os.Message msg) {
             switch (msg.what) {
                 case RECIEVE_MESSAGE:                                                    // if receive massage
@@ -157,32 +164,13 @@ float answer;
                         int foo = Integer.parseInt(sbprint);
                         float ans = (float) foo;
 
-                        final SeriesItem seriesItem = new SeriesItem.Builder(Color.RED)
+                         SeriesItem seriesItem = new SeriesItem.Builder((Color.parseColor("#1BC2EE")))
                                 .setRange(0, 350, 0)
+                                 .setInset(new PointF(50f, 50f))
+                                 .setLineWidth(75)
                                 .build();
 
                         int series1Index = decoView.addSeries(seriesItem);
-
-
-                        decoView.addEvent(new DecoEvent.Builder(16.3f)
-                                .setIndex(series1Index)
-                                .setDelay(1000)
-                                .build());
-
-                        decoView.addEvent(new DecoEvent.Builder(30f)
-                                .setIndex(series1Index)
-                                .setDelay(1000)
-                                .build());
-
-                        decoView.addEvent(new DecoEvent.Builder(46f)
-                                .setIndex(series1Index)
-                                .setDelay(1000)
-                                .build());
-
-                        decoView.addEvent(new DecoEvent.Builder(ans)
-                                .setIndex(series1Index)
-                                .setDelay(1000)
-                                .build());
 
 
 
@@ -191,29 +179,62 @@ float answer;
                         SpannableString ss1;
                         TextView tv;
 
+                        ANS = ans;
 
 
+                        if(ANS > 50) {
 
-                        if(ANS > 40) {
+
 
                             s = "Everything is ok!";
                             ss1 = new SpannableString(s);
                             ss1.setSpan(new RelativeSizeSpan(2f), 0, 17, 0); // set size
-                            ss1.setSpan(new ForegroundColorSpan(Color.BLUE), 0, 17, 0);// set color
+                            ss1.setSpan(new ForegroundColorSpan(Color.parseColor("#1BC2EE")), 0, 17, 0);// set color
                             tv = (TextView) findViewById(R.id.textPercentage);
                             tv.setText(ss1);
+                            decoView.deleteAll();
+
+                             seriesItem = new SeriesItem.Builder((Color.parseColor("#1BC2EE")))
+                                    .setRange(0, 350, 0)
+                                     .setInset(new PointF(50f, 50f))
+                                     .setInterpolator(new AccelerateInterpolator())
+
+                                    .setLineWidth(75)
+                                    .build();
+
+                            series1Index = decoView.addSeries(seriesItem);
+                            decoView.addEvent(new DecoEvent.Builder(ans)
+                                    .setIndex(series1Index)
+
+                                    .setDelay(1000)
+                                    .build());
                         }
-                        else if(ANS < 40) {
+                        else if(ANS < 50 && ANS > 20) {
+
 
 
                             s = "Level Low!";
                             ss1 = new SpannableString(s);
                             ss1.setSpan(new RelativeSizeSpan(2f), 0, 10, 0); // set size
-                            ss1.setSpan(new ForegroundColorSpan(Color.BLUE), 0, 10, 0);// set color
+                            ss1.setSpan(new ForegroundColorSpan(Color.parseColor("#1BC2EE")), 0, 10, 0);// set color
                             tv = (TextView) findViewById(R.id.textPercentage);
                             tv.setText(ss1);
+                            decoView.deleteAll();
+
+                            seriesItem = new SeriesItem.Builder((Color.parseColor("#1BC2EE")))
+                                    .setRange(0, 350, 0)
+                                    .setLineWidth(75)
+                                    .setInset(new PointF(50f, 50f))
+                                    .build();
+
+                            series1Index = decoView.addSeries(seriesItem);
+                            decoView.addEvent(new DecoEvent.Builder(ans)
+                                    .setIndex(series1Index)
+                                    .setDelay(1000)
+                                    .build());
                         }
-                        else if(ANS < 10) {
+                        else if (ANS < 20){
+
 
 
                             s = "Level is Critical";
@@ -222,9 +243,23 @@ float answer;
                             ss1.setSpan(new ForegroundColorSpan(Color.RED), 0, 17, 0);// set color
                             tv = (TextView) findViewById(R.id.textPercentage);
                             tv.setText(ss1);
+
+                            decoView.deleteAll();
+
+                            seriesItem = new SeriesItem.Builder((Color.RED))
+                                    .setRange(0, 350, 0)
+                                    .setInset(new PointF(50f, 50f))
+                                    .setLineWidth(75)
+                                    .build();
+
+                            series1Index = decoView.addSeries(seriesItem);
+                            decoView.addEvent(new DecoEvent.Builder(ans)
+                                    .setIndex(series1Index)
+                                    .setDelay(1000)
+                                    .build());
                         }
 
-                        if (ANS<4) {
+                       /* if (ANS<4) {
                             s = "Temperature is below 0";
                             ss1 = new SpannableString(s);
                             ss1.setSpan(new RelativeSizeSpan(2f), 0, 14, 0); // set size
@@ -232,7 +267,7 @@ float answer;
                             tv = (TextView) findViewById(R.id.textPercentage);
                             tv.setText(ss1);
                         }
-
+*/
 
 
 
@@ -247,22 +282,37 @@ float answer;
 
                       //  textPercentage.setText("D" + ans);// update TextView
 
-                        ripple.setEnabled(true);
+                        //ripple.setEnabled(true);
                     }
                     //Log.d(TAG, "...String:"+ sb.toString() +  "Byte:" + msg.arg1 + "...");
                     break;
             }
+
+
+
+
         }
 
-        ;
-    };
 
-    btAdapter = BluetoothAdapter.getDefaultAdapter();        // get Bluetooth adapter
-    checkBTState();
+                             };
 
-       ripple.setOnClickListener(new OnClickListener() {
+          btAdapter = BluetoothAdapter.getDefaultAdapter();        // get Bluetooth adapter
+            checkBTState();
+
+
+
+        textPercentage.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                ripple.setEnabled(false);
+                //ripple.setEnabled(false);
+                mConnectedThread.write("ripple");    // Send "1" via Bluetooth
+
+               // Toast.makeText(getBaseContext(), "DATA REQUESTED", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        decoView.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                //ripple.setEnabled(false);
                 mConnectedThread.write("ripple");    // Send "1" via Bluetooth
                 //Toast.makeText(getBaseContext(), "Turn on LED", Toast.LENGTH_SHORT).show();
             }
@@ -272,7 +322,7 @@ float answer;
 
 }
 
-    private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
+     private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
         if (Build.VERSION.SDK_INT >= 10) {
             try {
                 final Method m = device.getClass().getMethod("createInsecureRfcommSocketToServiceRecord", new Class[]{UUID.class});
@@ -318,6 +368,7 @@ float answer;
         Log.d(TAG, "...Connecting...");
         try {
             btSocket.connect();
+            Toast.makeText(getBaseContext(), "connected", Toast.LENGTH_SHORT).show();
             Log.d(TAG, "....Connection ok...");
         } catch (IOException e) {
             try {
@@ -445,6 +496,13 @@ private class ConnectedThread extends Thread {
         }
     }
 
+
+
+
+
+
+
+
     /* Call this from the main activity to send data to the remote device */
     public void write(String message) {
         Log.d(TAG, "...Data to send: " + message + "...");
@@ -455,5 +513,18 @@ private class ConnectedThread extends Thread {
             Log.d(TAG, "...Error data send: " + e.getMessage() + "...");
         }
     }
+
+
+
 }
+    public void snd(){
+
+        mConnectedThread.write("ripple");
+
+    }
+
+
+
+
+
 }
