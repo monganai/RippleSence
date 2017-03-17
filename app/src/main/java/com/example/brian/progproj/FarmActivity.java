@@ -44,21 +44,6 @@ DecoView decoView;
 
         SeriesItem item = new SeriesItem.Builder(Color.BLUE).setRange(0, 3500, 0).build();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         View root = ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
         root.setBackgroundColor(Color.WHITE);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -70,32 +55,16 @@ DecoView decoView;
        // Snackbar.make(findViewById(android.R.id.content), strings.get(0), Snackbar.LENGTH_LONG).setDuration(1800).show();
 
         for(String s : strings){
-            Bitmap bitmap = new ImageSaver(this.getApplicationContext()).
+            Bitmap bitmap = Bitmap.createScaledBitmap(new ImageSaver(this.getApplicationContext()).
                     setFileName(s + ".png").
                     setDirectoryName("farms").
-                    load();
+                    load(), 128, 128, false);
             farms.add(new FarmInstance(s, bitmap));
         }
         arrayAdapter = new FarmGridAdapter(
                 this,
                 farms);
         list.setAdapter(arrayAdapter);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

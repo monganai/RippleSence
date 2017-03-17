@@ -71,7 +71,7 @@ public class AddFarmActivity extends AppCompatActivity {
         new ImageSaver(this.getApplicationContext()).
                 setFileName(farmName + ".png").
                 setDirectoryName("farms").
-                save(icon);
+                save(Bitmap.createScaledBitmap(icon, 128, 128, false));
         setResult(RESULT_OK);
         finish();
     }

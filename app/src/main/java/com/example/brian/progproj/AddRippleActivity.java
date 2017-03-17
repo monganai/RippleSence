@@ -59,21 +59,22 @@ public class AddRippleActivity extends AppCompatActivity {
             return;
         }
         TinyDB db = new TinyDB(this.getApplicationContext());
-        if(db.getString(textbox.getText().toString()) != null){
+        /**if(db.getString(textbox.getText().toString()) != null){
             Snackbar.make(findViewById(android.R.id.content), "A Ripple with this name already exists!", Snackbar.LENGTH_LONG).setDuration(1800).show();
             return;
-        }
+        }**/
         ArrayList<String> farms = new ArrayList<>();
         if(db.getListString(parentFarm + "_ripple") != null){
             farms = db.getListString(parentFarm + "_ripple");
         }
-        String farmName = textbox.getText().toString();
+        RippleInstance r = new RippleInstance(textbox.getText().toString(), Bitmap.createScaledBitmap(icon, 128, 128, false));
+        String farmName = r.toString();
         farms.add(farmName);
         db.putListString(parentFarm + "_ripple", farms);
         new ImageSaver(this.getApplicationContext()).
-                setFileName(farmName + ".png").
+                setFileName(r.getName() + ".png").
                 setDirectoryName(parentFarm + "_ripple").
-                save(icon);
+                save(Bitmap.createScaledBitmap(icon, 128, 128, false));
         setResult(RESULT_OK);
         finish();
     }

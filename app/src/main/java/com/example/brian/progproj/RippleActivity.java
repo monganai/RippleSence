@@ -10,6 +10,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -17,6 +18,7 @@ import android.widget.GridView;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.hookedonplay.decoviewlib.DecoView;
 import com.hookedonplay.decoviewlib.charts.SeriesItem;
@@ -56,13 +58,26 @@ public class RippleActivity extends Activity {
         TinyDB db = new TinyDB(this.getApplicationContext());
         ArrayList<String> strings = db.getListString(parentFarm + "_ripple");
         // Snackbar.make(findViewById(android.R.id.content), strings.get(0), Snackbar.LENGTH_LONG).setDuration(1800).show();
-
+        /**
         for(String s : strings){
-            Bitmap bitmap = new ImageSaver(this.getApplicationContext()).
+            Bitmap bitmap = Bitmap.createScaledBitmap(new ImageSaver(this.getApplicationContext()).
                     setFileName(s + ".png").
                     setDirectoryName(parentFarm + "_ripple").
-                    load();
+                    load(),32, 32, false);
             farms.add(new RippleInstance(s, bitmap));
+        }
+         **/
+        for(String s : strings){ //parentFarm + ":" + r.getName() + ".png"
+            RippleInstance r = new Gson().fromJson(s, RippleInstance.class);
+            /**Bitmap bitmap = new ImageSaver(this.getApplicationContext()).
+                    setFileName(r.getName() + ".png").
+                    setDirectoryName(parentFarm + "_ripple").
+                    load();
+            //r.setImage(bitmap);**/
+            farms.add(r);
+        }
+        for(RippleInstance ri : farms){
+            log(ri.getName(), ri.toString());
         }
         arrayAdapter = new RippleGridAdapter(
                 this,
@@ -138,27 +153,20 @@ public class RippleActivity extends Activity {
                 .build());
 
 
+    }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public void log(String tag, String message) {
+        // Split by line, then ensure each line can fit into Log's maximum length.
+        for (int i = 0, length = message.length(); i < length; i++) {
+            int newline = message.indexOf('\n', i);
+            newline = newline != -1 ? newline : length;
+            do {
+                int end = Math.min(newline, i + 4000);
+                Log.d(tag, message.substring(i, end));
+                i = end;
+            } while (i < newline);
+        }
     }
 
     protected void onResume(){
@@ -166,12 +174,21 @@ public class RippleActivity extends Activity {
         TinyDB db = new TinyDB(this.getApplicationContext());
         farms.clear();
         ArrayList<String> strings = db.getListString(parentFarm + "_ripple");
-        for(String s : strings){
+        /**for(String s : strings){
             Bitmap bitmap = new ImageSaver(this.getApplicationContext()).
                     setFileName(s + ".png").
                     setDirectoryName(parentFarm + "_ripple").
                     load();
-            farms.add(new RippleInstance(s, bitmap));}
+            farms.add(new RippleInstance(s, bitmap));}**/
+        for(String s : strings){
+            RippleInstance r = new Gson().fromJson(s, RippleInstance.class);
+/**            Bitmap bitmap = new ImageSaver(this.getApplicationContext()).
+                    setFileName(r.getName() + ".png").
+                    setDirectoryName(parentFarm + "_ripple").
+                    load();
+            //r.setImage(bitmap);**/
+            farms.add(r);
+        }
         arrayAdapter = new RippleGridAdapter(
                 this,
                 farms);
@@ -192,12 +209,21 @@ public class RippleActivity extends Activity {
                 TinyDB db = new TinyDB(this.getApplicationContext());
                 ArrayList<String> strings = db.getListString(parentFarm + "_ripple");
                 farms.clear();
+                /**for(String s : strings){
+                 Bitmap bitmap = new ImageSaver(this.getApplicationContext()).
+                 setFileName(s + ".png").
+                 setDirectoryName(parentFarm + "_ripple").
+                 load();
+                 farms.add(new RippleInstance(s, bitmap));}**/
                 for(String s : strings){
-                    Bitmap bitmap = new ImageSaver(this.getApplicationContext()).
-                            setFileName(s + ".png").
+                    RippleInstance r = new Gson().fromJson(s, RippleInstance.class);
+                    /**Bitmap bitmap = new ImageSaver(this.getApplicationContext()).
+                            setFileName(r.getName() + ".png").
                             setDirectoryName(parentFarm + "_ripple").
                             load();
-                    farms.add(new RippleInstance(s, bitmap)); }
+                   // r.setImage(bitmap);**/
+                    farms.add(r);
+                }
                 arrayAdapter.notifyDataSetChanged();
             }
         }
