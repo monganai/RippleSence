@@ -13,6 +13,10 @@
     tools:context="com.example.brian.progproj.FarmActivity"
 
     tools:showIn="@layout/activity_farm">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#c0c0c0"/>
     <GridView
         android:layout_width="match_parent"
         android:id="@+id/farmList"

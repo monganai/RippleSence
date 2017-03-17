@@ -11,11 +11,13 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -40,11 +42,6 @@ public class RippleActivity extends Activity {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         Bundle b = getIntent().getExtras();
-
-
-
-
-
         if(b != null){
             parentFarm = b.getString("farm");
         }
@@ -54,6 +51,10 @@ public class RippleActivity extends Activity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
         GridView list = (GridView) findViewById(R.id.farmList);
+        TextView empty = new TextView(this);
+        ((ViewGroup) list.getParent()).addView(empty);
+        empty.setText("No Ripples :( \n Click + to add a new Ripple!");
+        list.setEmptyView(empty);
         list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         TinyDB db = new TinyDB(this.getApplicationContext());
         ArrayList<String> strings = db.getListString(parentFarm + "_ripple");

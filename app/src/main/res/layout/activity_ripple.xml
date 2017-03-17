@@ -19,17 +19,17 @@
         android:onClick="onClick"/>
 
     <include layout="@layout/content_farm"
-        android:layout_height="261dp"
+        android:layout_height="280dp"
         android:layout_width="wrap_content"
         android:layout_gravity="bottom|right" />
-
     <com.hookedonplay.decoviewlib.DecoView
         android:layout_width="wrap_content"
         android:layout_height="302dp"
 
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="78dp"
+        android:layout_marginBottom="10dp"
         android:id="@+id/dynamicArcView2" />
+
 
 </android.support.design.widget.CoordinatorLayout>
