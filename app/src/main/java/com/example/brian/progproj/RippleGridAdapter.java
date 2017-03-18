@@ -2,6 +2,7 @@ package com.example.brian.progproj;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,7 @@ public class RippleGridAdapter extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
+        String[] colours = {"#1BC2EE", "#039CD5", "#4075BB", "#21409A"};
         View grid;
         LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -54,6 +56,7 @@ public class RippleGridAdapter extends BaseAdapter {
         textView.setText(getItem(position).getName());
         CircularImageView imageView = (CircularImageView) grid.findViewById(R.id.grid_image);
         imageView.setImageBitmap(getItem(position).getImage());
+        imageView.setBorderColor(Color.parseColor(colours[position%4]));
         final String address = getItem(position).getAddress();
         imageView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

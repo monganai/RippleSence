@@ -25,7 +25,10 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.hookedonplay.decoviewlib.DecoView;
 import com.hookedonplay.decoviewlib.charts.SeriesItem;
+import com.hookedonplay.decoviewlib.charts.SeriesLabel;
 import com.hookedonplay.decoviewlib.events.DecoEvent;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -47,7 +50,11 @@ public class RippleActivity extends Activity {
         if(b != null){
             parentFarm = b.getString("farm");
         }
+
         setContentView(R.layout.activity_ripple);
+        LinearLayout layout = (LinearLayout)findViewById(R.id.graph_layout);
+        TextView title = (TextView)layout.findViewById(R.id.textView);
+        title.setText(parentFarm);
         View root = ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
         root.setBackgroundColor(Color.WHITE);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -73,16 +80,27 @@ public class RippleActivity extends Activity {
         ArrayList<Integer> series = new ArrayList<>();
         ArrayList<SeriesItem> seriesItems = new ArrayList<>();
         String[] colours = {"#1BC2EE", "#039CD5", "#4075BB", "#21409A"};
+        String[] greys = {"#D0D0D0", "#B8B8B8"};
         if(farms.size() != 0) {
             float lineWidth = 160 / farms.size();
             for (int i = 0; i < farms.size(); i++) {
+                decoView.addSeries(new SeriesItem.Builder(Color.parseColor(greys[i % greys.length]))
+                        .setRange(0, 100, 100)
+                        .setInset(new PointF(50f + (lineWidth * i), 50f + (lineWidth * i)))
+                        .setInitialVisibility(true)
+                        .setLineWidth(lineWidth)
+                        .build());
                 final SeriesItem seriesItem = new SeriesItem.Builder((Color.parseColor(colours[i % 4])))
                         .setRange(0, 100, 0)
                         .setInset(new PointF(50f + (lineWidth * i), 50f + (lineWidth * i)))
                         .setInitialVisibility(false)
                         .setLineWidth(lineWidth)
+                        .setSeriesLabel(new SeriesLabel.Builder(farms.get(i).getName() + " %.0f%%")
+                                .setColorBack(Color.argb(218, 0, 0, 0))
+                                .setColorText(Color.argb(255, 255, 255, 255))
+                                .setVisible(true)
+                                .build())
                         .build();
-
                 seriesItems.add(seriesItem);
                 series.add(decoView.addSeries(seriesItem));
 

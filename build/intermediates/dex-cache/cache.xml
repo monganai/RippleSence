@@ -124,7 +124,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="3d566a37c54f9f5bb6ffea0f521f17ad9225e2aa">
+        sha1="f7277c0e4314be873918490c22cfa988de806951">
         <dex dex="C:\Users\brian\progproj\Ripple\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_f0542e754a626ae13f4757ec61b9054175a95931\classes.dex" />
     </item>
     <item
@@ -133,7 +133,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="4923016cd6d7e798758ba3da0c45d7d989fba548">
+        sha1="d038ac53262ccfe54c50bdeedcc7461fd5ce9127">
         <dex dex="C:\Users\brian\progproj\Ripple\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_31927875d6c0ec5b5d4b39349078ac97def5f01c\classes.dex" />
     </item>
     <item
