@@ -65,7 +65,7 @@ public class AddFarmActivity extends AppCompatActivity {
         if(db.getListString("Farms") != null){
             farms = db.getListString("Farms");
         }
-        RippleInstance r = new RippleInstance(textbox.getText().toString(), Bitmap.createScaledBitmap(icon, 128, 128, false));
+        RippleInstance r = new RippleInstance(textbox.getText().toString(), Bitmap.createScaledBitmap(icon, 128,  icon.getHeight()/(icon.getWidth()/128), false));
         String farmName = r.toString();
         farms.add(farmName);
         db.putListString("Farms", farms);

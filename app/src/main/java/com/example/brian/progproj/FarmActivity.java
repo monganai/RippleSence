@@ -14,7 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -38,7 +40,7 @@ public class FarmActivity extends Activity {
         setContentView(R.layout.activity_farm);
 
 
-DecoView decoView;
+        DecoView decoView;
 
         decoView = (DecoView) findViewById(R.id.dynamicArcView2);
 
@@ -47,12 +49,11 @@ DecoView decoView;
         View root = ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
         root.setBackgroundColor(Color.WHITE);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
         GridView list = (GridView) findViewById(R.id.farmList);
         list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        list.setEmptyView(findViewById(R.id.empty));
         TinyDB db = new TinyDB(this.getApplicationContext());
         ArrayList<String> strings = db.getListString("Farms");
-       // Snackbar.make(findViewById(android.R.id.content), strings.get(0), Snackbar.LENGTH_LONG).setDuration(1800).show();
 
         for(String s : strings){
             FarmInstance r = new Gson().fromJson(s, FarmInstance.class);
@@ -62,9 +63,6 @@ DecoView decoView;
                 this,
                 farms);
         list.setAdapter(arrayAdapter);
-
-
-
     }
 
     protected void onResume(){
@@ -82,9 +80,8 @@ DecoView decoView;
         GridView list = (GridView) findViewById(R.id.farmList);
         list.setAdapter(arrayAdapter);
         arrayAdapter.notifyDataSetChanged();
-
-
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Check which request we're responding to
@@ -109,31 +106,4 @@ DecoView decoView;
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         startActivityForResult(intent, ADD_FARM_REQUEST);
     }
-/**
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt("farmSize", farms.size());
-        for(int i = 0; i < farms.size(); i++){
-            outState.putString("farms" + i, new Gson().toJson(farms.get(i), FarmInstance.class));
-        }
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedState) {
-        super.onRestoreInstanceState(savedState);
-        int size = savedState.getInt("farmSize");
-        Gson gson = new Gson();
-        for(int i = 0; i < size; i++){
-            String json = savedState.getString("farms" + i);
-            FarmInstance farm = gson.fromJson(json, FarmInstance.class);
-            farms.add(farm);
-        }
-        arrayAdapter = new FarmGridAdapter(
-                this,
-                farms);
-        GridView list = (GridView) findViewById(R.id.farmList);
-        list.setAdapter(arrayAdapter);
-    }
-**/
 }

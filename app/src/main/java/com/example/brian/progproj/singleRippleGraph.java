@@ -18,11 +18,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Method;
 import java.util.UUID;
+
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -43,19 +45,20 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+
 import com.hookedonplay.decoviewlib.DecoView;
 import com.hookedonplay.decoviewlib.charts.SeriesItem;
 import com.hookedonplay.decoviewlib.charts.SeriesLabel;
 import com.hookedonplay.decoviewlib.events.DecoEvent;
+
 import menu.BlankFragment;
 import menu.DetailFragment;
 
 import static android.R.attr.delay;
 
-public class singleRippleGraph extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class singleRippleGraph extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-float ANS =0;
+    float ANS = 0;
     DecoView decoView;
     private static final String TAG = "ripplesence";
 
@@ -98,7 +101,6 @@ float ANS =0;
         a.setText(ss);
 
 
-
         decoView = (DecoView) findViewById(R.id.dynamicArcView);
 
         final SeriesItem seriesItem = new SeriesItem.Builder((Color.parseColor("#1BC2EE")))
@@ -111,153 +113,126 @@ float ANS =0;
                 .build();
 
 
-
-
-
-
-
         final TextView textPercentage = (TextView) findViewById(R.id.textPercentage);
         seriesItem.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
             @Override
             public void onSeriesItemAnimationProgress(float percentComplete, float currentPosition) {
-                float percentFilled =((currentPosition - seriesItem.getMinValue()) / (seriesItem.getMaxValue() - seriesItem.getMinValue()));
+                float percentFilled = ((currentPosition - seriesItem.getMinValue()) / (seriesItem.getMaxValue() - seriesItem.getMinValue()));
                 textPercentage.setText(String.format("%.0f%%", percentFilled * 100f));
             }
 
             @Override
             public void onSeriesItemDisplayProgress(float percentComplete) {
 
-
             }
 
-
-
-
-
-
-
-
-
         });
-            float answer;
+        float answer;
         answer = ANS;
 
 
-
-
-       //  ripple = (Button) findViewById(R.id.ripple);                    // button LED ON
-
-
-
-
+        //  ripple = (Button) findViewById(R.id.ripple);                    // button LED ON
         h = new Handler() {
-        public void handleMessage(android.os.Message msg) {
-            switch (msg.what) {
-                case RECIEVE_MESSAGE:                                                    // if receive massage
-                    byte[] readBuf = (byte[]) msg.obj;
-                    String strIncom = new String(readBuf, 0, msg.arg1);                    // create string from bytes array
-                    sb.append(strIncom);                                                // append string
-                    int endOfLineIndex = sb.indexOf("\r\n");                            // determine the end-of-line
-                    if (endOfLineIndex > 0) {                                            // if end-of-line,
-                        String sbprint = sb.substring(0, endOfLineIndex);                // extract string
-                        sb.delete(0, sb.length());// and clear
-                        int foo = Integer.parseInt(sbprint);
-                        float ans = (float) foo;
+            public void handleMessage(android.os.Message msg) {
+                switch (msg.what) {
+                    case RECIEVE_MESSAGE:                                                    // if receive massage
+                        byte[] readBuf = (byte[]) msg.obj;
+                        String strIncom = new String(readBuf, 0, msg.arg1);                    // create string from bytes array
+                        sb.append(strIncom);                                                // append string
+                        int endOfLineIndex = sb.indexOf("\r\n");                            // determine the end-of-line
+                        if (endOfLineIndex > 0) {                                            // if end-of-line,
+                            String sbprint = sb.substring(0, endOfLineIndex);                // extract string
+                            sb.delete(0, sb.length());// and clear
+                            int foo = Integer.parseInt(sbprint);
+                            float ans = (float) foo;
 
-                         SeriesItem seriesItem = new SeriesItem.Builder((Color.parseColor("#1BC2EE")))
-                                .setRange(0, 350, 0)
-                                 .setInset(new PointF(50f, 50f))
-                                 .setLineWidth(75)
-                                .build();
-
-                        int series1Index = decoView.addSeries(seriesItem);
-
-
-
-
-                        String s;
-                        SpannableString ss1;
-                        TextView tv;
-
-                        ANS = ans;
-
-
-                        if(ANS > 50) {
-
-
-
-                            s = "Everything is ok!";
-                            ss1 = new SpannableString(s);
-                            ss1.setSpan(new RelativeSizeSpan(2f), 0, 17, 0); // set size
-                            ss1.setSpan(new ForegroundColorSpan(Color.parseColor("#1BC2EE")), 0, 17, 0);// set color
-                            tv = (TextView) findViewById(R.id.textPercentage);
-                            tv.setText(ss1);
-                            decoView.deleteAll();
-
-                             seriesItem = new SeriesItem.Builder((Color.parseColor("#1BC2EE")))
-                                    .setRange(0, 350, 0)
-                                     .setInset(new PointF(50f, 50f))
-                                     .setInterpolator(new AccelerateInterpolator())
-
-                                    .setLineWidth(75)
-                                    .build();
-
-                            series1Index = decoView.addSeries(seriesItem);
-                            decoView.addEvent(new DecoEvent.Builder(ans)
-                                    .setIndex(series1Index)
-
-                                    .setDelay(1000)
-                                    .build());
-                        }
-                        else if(ANS < 50 && ANS > 20) {
-
-
-
-                            s = "Level Low!";
-                            ss1 = new SpannableString(s);
-                            ss1.setSpan(new RelativeSizeSpan(2f), 0, 10, 0); // set size
-                            ss1.setSpan(new ForegroundColorSpan(Color.parseColor("#1BC2EE")), 0, 10, 0);// set color
-                            tv = (TextView) findViewById(R.id.textPercentage);
-                            tv.setText(ss1);
-                            decoView.deleteAll();
-
-                            seriesItem = new SeriesItem.Builder((Color.parseColor("#1BC2EE")))
-                                    .setRange(0, 350, 0)
-                                    .setLineWidth(75)
-                                    .setInset(new PointF(50f, 50f))
-                                    .build();
-
-                            series1Index = decoView.addSeries(seriesItem);
-                            decoView.addEvent(new DecoEvent.Builder(ans)
-                                    .setIndex(series1Index)
-                                    .setDelay(1000)
-                                    .build());
-                        }
-                        else if (ANS < 20){
-
-
-
-                            s = "Level is Critical";
-                            ss1 = new SpannableString(s);
-                            ss1.setSpan(new RelativeSizeSpan(2f), 0, 17, 0); // set size
-                            ss1.setSpan(new ForegroundColorSpan(Color.RED), 0, 17, 0);// set color
-                            tv = (TextView) findViewById(R.id.textPercentage);
-                            tv.setText(ss1);
-
-                            decoView.deleteAll();
-
-                            seriesItem = new SeriesItem.Builder((Color.RED))
+                            SeriesItem seriesItem = new SeriesItem.Builder((Color.parseColor("#1BC2EE")))
                                     .setRange(0, 350, 0)
                                     .setInset(new PointF(50f, 50f))
                                     .setLineWidth(75)
                                     .build();
 
-                            series1Index = decoView.addSeries(seriesItem);
-                            decoView.addEvent(new DecoEvent.Builder(ans)
-                                    .setIndex(series1Index)
-                                    .setDelay(1000)
-                                    .build());
-                        }
+                            int series1Index = decoView.addSeries(seriesItem);
+
+
+                            String s;
+                            SpannableString ss1;
+                            TextView tv;
+
+                            ANS = ans;
+
+
+                            if (ANS > 50) {
+
+
+                                s = "Everything is ok!";
+                                ss1 = new SpannableString(s);
+                                ss1.setSpan(new RelativeSizeSpan(2f), 0, 17, 0); // set size
+                                ss1.setSpan(new ForegroundColorSpan(Color.parseColor("#1BC2EE")), 0, 17, 0);// set color
+                                tv = (TextView) findViewById(R.id.textPercentage);
+                                tv.setText(ss1);
+                                decoView.deleteAll();
+
+                                seriesItem = new SeriesItem.Builder((Color.parseColor("#1BC2EE")))
+                                        .setRange(0, 350, 0)
+                                        .setInset(new PointF(50f, 50f))
+                                        .setInterpolator(new AccelerateInterpolator())
+
+                                        .setLineWidth(75)
+                                        .build();
+
+                                series1Index = decoView.addSeries(seriesItem);
+                                decoView.addEvent(new DecoEvent.Builder(ans)
+                                        .setIndex(series1Index)
+
+                                        .setDelay(1000)
+                                        .build());
+                            } else if (ANS < 50 && ANS > 20) {
+
+
+                                s = "Level Low!";
+                                ss1 = new SpannableString(s);
+                                ss1.setSpan(new RelativeSizeSpan(2f), 0, 10, 0); // set size
+                                ss1.setSpan(new ForegroundColorSpan(Color.parseColor("#1BC2EE")), 0, 10, 0);// set color
+                                tv = (TextView) findViewById(R.id.textPercentage);
+                                tv.setText(ss1);
+                                decoView.deleteAll();
+
+                                seriesItem = new SeriesItem.Builder((Color.parseColor("#1BC2EE")))
+                                        .setRange(0, 350, 0)
+                                        .setLineWidth(75)
+                                        .setInset(new PointF(50f, 50f))
+                                        .build();
+
+                                series1Index = decoView.addSeries(seriesItem);
+                                decoView.addEvent(new DecoEvent.Builder(ans)
+                                        .setIndex(series1Index)
+                                        .setDelay(1000)
+                                        .build());
+                            } else if (ANS < 20) {
+
+
+                                s = "Level is Critical";
+                                ss1 = new SpannableString(s);
+                                ss1.setSpan(new RelativeSizeSpan(2f), 0, 17, 0); // set size
+                                ss1.setSpan(new ForegroundColorSpan(Color.RED), 0, 17, 0);// set color
+                                tv = (TextView) findViewById(R.id.textPercentage);
+                                tv.setText(ss1);
+
+                                decoView.deleteAll();
+
+                                seriesItem = new SeriesItem.Builder((Color.RED))
+                                        .setRange(0, 350, 0)
+                                        .setInset(new PointF(50f, 50f))
+                                        .setLineWidth(75)
+                                        .build();
+
+                                series1Index = decoView.addSeries(seriesItem);
+                                decoView.addEvent(new DecoEvent.Builder(ans)
+                                        .setIndex(series1Index)
+                                        .setDelay(1000)
+                                        .build());
+                            }
 
                        /* if (ANS<4) {
                             s = "Temperature is below 0";
@@ -270,35 +245,22 @@ float ANS =0;
 */
 
 
+                            //  textPercentage.setText("D" + ans);// update TextView
+
+                            //ripple.setEnabled(true);
+                        }
+                        //Log.d(TAG, "...String:"+ sb.toString() +  "Byte:" + msg.arg1 + "...");
+                        break;
+                }
 
 
-
-
-
-
-
-
-
-
-                      //  textPercentage.setText("D" + ans);// update TextView
-
-                        //ripple.setEnabled(true);
-                    }
-                    //Log.d(TAG, "...String:"+ sb.toString() +  "Byte:" + msg.arg1 + "...");
-                    break;
             }
 
 
+        };
 
-
-        }
-
-
-                             };
-
-          btAdapter = BluetoothAdapter.getDefaultAdapter();        // get Bluetooth adapter
-            checkBTState();
-
+        btAdapter = BluetoothAdapter.getDefaultAdapter();        // get Bluetooth adapter
+        checkBTState();
 
 
         textPercentage.setOnClickListener(new OnClickListener() {
@@ -306,7 +268,7 @@ float ANS =0;
                 //ripple.setEnabled(false);
                 mConnectedThread.write("ripple");    // Send "1" via Bluetooth
 
-               // Toast.makeText(getBaseContext(), "DATA REQUESTED", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getBaseContext(), "DATA REQUESTED", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -319,10 +281,9 @@ float ANS =0;
         });
 
 
+    }
 
-}
-
-     private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
+    private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
         if (Build.VERSION.SDK_INT >= 10) {
             try {
                 final Method m = device.getClass().getMethod("createInsecureRfcommSocketToServiceRecord", new Class[]{UUID.class});
@@ -420,14 +381,6 @@ float ANS =0;
     }
 
 
-
-
-
-
-
-
-
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -460,71 +413,62 @@ float ANS =0;
     }
 
 
-private class ConnectedThread extends Thread {
-    private final InputStream mmInStream;
-    private final OutputStream mmOutStream;
+    private class ConnectedThread extends Thread {
+        private final InputStream mmInStream;
+        private final OutputStream mmOutStream;
 
-    public ConnectedThread(BluetoothSocket socket) {
-        InputStream tmpIn = null;
-        OutputStream tmpOut = null;
+        public ConnectedThread(BluetoothSocket socket) {
+            InputStream tmpIn = null;
+            OutputStream tmpOut = null;
 
-        // Get the input and output streams, using temp objects because
-        // member streams are final
-        try {
-            tmpIn = socket.getInputStream();
-            tmpOut = socket.getOutputStream();
-        } catch (IOException e) {
+            // Get the input and output streams, using temp objects because
+            // member streams are final
+            try {
+                tmpIn = socket.getInputStream();
+                tmpOut = socket.getOutputStream();
+            } catch (IOException e) {
+            }
+
+            mmInStream = tmpIn;
+            mmOutStream = tmpOut;
         }
 
-        mmInStream = tmpIn;
-        mmOutStream = tmpOut;
-    }
+        public void run() {
+            byte[] buffer = new byte[256];  // buffer store for the stream
+            int bytes; // bytes returned from read()
 
-    public void run() {
-        byte[] buffer = new byte[256];  // buffer store for the stream
-        int bytes; // bytes returned from read()
-
-        // Keep listening to the InputStream until an exception occurs
-        while (true) {
-            try {
-                // Read from the InputStream
-                bytes = mmInStream.read(buffer);        // Get number of bytes and message in "buffer"
-                h.obtainMessage(RECIEVE_MESSAGE, bytes, -1, buffer).sendToTarget();        // Send to message queue Handler
-            } catch (IOException e) {
-                break;
+            // Keep listening to the InputStream until an exception occurs
+            while (true) {
+                try {
+                    // Read from the InputStream
+                    bytes = mmInStream.read(buffer);        // Get number of bytes and message in "buffer"
+                    h.obtainMessage(RECIEVE_MESSAGE, bytes, -1, buffer).sendToTarget();        // Send to message queue Handler
+                } catch (IOException e) {
+                    break;
+                }
             }
         }
-    }
 
 
-
-
-
-
-
-
-    /* Call this from the main activity to send data to the remote device */
-    public void write(String message) {
-        Log.d(TAG, "...Data to send: " + message + "...");
-        byte[] msgBuffer = message.getBytes();
-        try {
-            mmOutStream.write(msgBuffer);
-        } catch (IOException e) {
-            Log.d(TAG, "...Error data send: " + e.getMessage() + "...");
+        /* Call this from the main activity to send data to the remote device */
+        public void write(String message) {
+            Log.d(TAG, "...Data to send: " + message + "...");
+            byte[] msgBuffer = message.getBytes();
+            try {
+                mmOutStream.write(msgBuffer);
+            } catch (IOException e) {
+                Log.d(TAG, "...Error data send: " + e.getMessage() + "...");
+            }
         }
+
+
     }
 
-
-
-}
-    public void snd(){
+    public void snd() {
 
         mConnectedThread.write("ripple");
 
     }
-
-
-
 
 
 }

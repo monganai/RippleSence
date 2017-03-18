@@ -19,6 +19,7 @@ import com.mikhaellopez.circularimageview.CircularImageView;
 import com.mvc.imagepicker.ImagePicker;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class AddRippleActivity extends AppCompatActivity {
 
@@ -40,7 +41,8 @@ public class AddRippleActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         icon = ImagePicker.getImageFromResult(this, requestCode, resultCode, data);
         CircularImageView view = (CircularImageView) findViewById(R.id.imageButton);
-        view.setImageBitmap(icon);
+        if(icon != null)
+            view.setImageBitmap(icon);
     }
 
     public void onSelectImage(View view){
@@ -67,7 +69,9 @@ public class AddRippleActivity extends AppCompatActivity {
         if(db.getListString(parentFarm + "_ripple") != null){
             farms = db.getListString(parentFarm + "_ripple");
         }
-        RippleInstance r = new RippleInstance(textbox.getText().toString(), Bitmap.createScaledBitmap(icon, 128, 128, false));
+        RippleInstance r = new RippleInstance(textbox.getText().toString(), Bitmap.createScaledBitmap(icon, 128,  icon.getHeight()/(icon.getWidth()/128), false));
+        Random q = new Random();
+        r.waterLevel = q.nextInt(100);
         String farmName = r.toString();
         farms.add(farmName);
         db.putListString(parentFarm + "_ripple", farms);

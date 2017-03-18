@@ -16,6 +16,8 @@ import java.util.ArrayList;
 public class RippleInstance {
     String name;
     String image;
+    int waterLevel = 0;
+    int temp = 0;
     String address = "98:D3:31:FB:1F:75";
 
     public RippleInstance(String farmName, Bitmap icon){
