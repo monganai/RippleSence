@@ -1,11 +1,13 @@
 package com.example.brian.progproj;
 
+import android.app.Application;
 import android.graphics.PointF;
 import android.support.v4.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
@@ -79,6 +81,8 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
     // MAC-address of Bluetooth module, hardcoded hardware address of hco5
     private static String address = "98:D3:31:FB:1F:75";
 
+    private SwipeRefreshLayout swipeContainer;
+
     /**
      * Called when the activity is first created.
      */
@@ -88,6 +92,26 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
         setContentView(R.layout.activity_main2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mConnectedThread.write("ripple");
+                Toast.makeText(getApplicationContext(), "refresh", Toast.LENGTH_SHORT);
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(swipeContainer.isRefreshing()){
+                            swipeContainer.setRefreshing(false);
+                            Snackbar.make(findViewById(android.R.id.content), "Failed to get Ripple Data" , Snackbar.LENGTH_LONG).setDuration(1800).show();
+                        }
+                    }
+                }, 3000);
+
+            }
+        });
 
         String initial = "Tap Screen To Begin";
         SpannableString ss;
@@ -136,6 +160,7 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
             public void handleMessage(android.os.Message msg) {
                 switch (msg.what) {
                     case RECIEVE_MESSAGE:                                                    // if receive massage
+                        swipeContainer.setRefreshing(false);
                         byte[] readBuf = (byte[]) msg.obj;
                         String strIncom = new String(readBuf, 0, msg.arg1);                    // create string from bytes array
                         sb.append(strIncom);                                                // append string

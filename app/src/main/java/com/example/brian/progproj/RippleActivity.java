@@ -42,6 +42,7 @@ public class RippleActivity extends Activity {
     ArrayList<RippleInstance> farms = new ArrayList<>();
     RippleGridAdapter arrayAdapter;
     String parentFarm = "";
+    float warningPercentage = 50.0f;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
@@ -84,13 +85,17 @@ public class RippleActivity extends Activity {
         if(farms.size() != 0) {
             float lineWidth = 160 / farms.size();
             for (int i = 0; i < farms.size(); i++) {
+                int c = Color.parseColor(colours[i%4]);
+
+                if(farms.get(i).waterLevel < warningPercentage)
+                    c = Color.parseColor("#8b0000");
                 decoView.addSeries(new SeriesItem.Builder(Color.parseColor(greys[i % greys.length]))
                         .setRange(0, 100, 100)
                         .setInset(new PointF(50f + (lineWidth * i), 50f + (lineWidth * i)))
                         .setInitialVisibility(true)
                         .setLineWidth(lineWidth)
                         .build());
-                final SeriesItem seriesItem = new SeriesItem.Builder((Color.parseColor(colours[i % 4])))
+                final SeriesItem seriesItem = new SeriesItem.Builder(c)
                         .setRange(0, 100, 0)
                         .setInset(new PointF(50f + (lineWidth * i), 50f + (lineWidth * i)))
                         .setInitialVisibility(false)
@@ -168,16 +173,27 @@ public class RippleActivity extends Activity {
             ArrayList<Integer> series = new ArrayList<>();
             ArrayList<SeriesItem> seriesItems = new ArrayList<>();
             String[] colours = {"#1BC2EE", "#039CD5", "#4075BB", "#21409A"};
+            String[] greys = {"#D0D0D0", "#B8B8B8"};
             float lineWidth = 160/farms.size();
             if(farms.size() < 3)
                 lineWidth = 160/3;
             for(int i = 0; i < farms.size(); i++) {
-                final SeriesItem seriesItem = new SeriesItem.Builder((Color.parseColor(colours[i%4])))
+                int c = Color.parseColor(colours[i%4]);
+
+                if(farms.get(i).waterLevel < warningPercentage)
+                    c = Color.parseColor("#8b0000");
+                final SeriesItem seriesItem = new SeriesItem.Builder((c))
                         .setRange(0, 100, 0)
                         .setInset(new PointF(50f + (lineWidth * i), 50f + (lineWidth * i)))
                         .setInitialVisibility(false)
                         .setLineWidth(lineWidth)
                         .build();
+                decoView.addSeries(new SeriesItem.Builder(Color.parseColor(greys[i % greys.length]))
+                        .setRange(0, 100, 100)
+                        .setInset(new PointF(50f + (lineWidth * i), 50f + (lineWidth * i)))
+                        .setInitialVisibility(true)
+                        .setLineWidth(lineWidth)
+                        .build());
 
                 seriesItems.add(seriesItem);
                 series.add(decoView.addSeries(seriesItem));
