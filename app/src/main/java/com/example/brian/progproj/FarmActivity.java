@@ -42,7 +42,7 @@ public class FarmActivity extends Activity {
 
         DecoView decoView;
 
-        decoView = (DecoView) findViewById(R.id.dynamicArcView2);
+        decoView = (DecoView) findViewById(R.id.decoView2);
 
         SeriesItem item = new SeriesItem.Builder(Color.BLUE).setRange(0, 3500, 0).build();
 

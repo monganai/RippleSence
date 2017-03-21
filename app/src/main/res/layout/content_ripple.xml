@@ -14,10 +14,6 @@
 
     tools:showIn="@layout/activity_ripple">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#c0c0c0"/>
     <GridView
         android:layout_width="match_parent"
         android:id="@+id/rippleList"
@@ -27,11 +23,15 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:id="@+id/empty">
+        android:id="@+id/empty"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
         <android.support.v7.widget.AppCompatImageView
             android:layout_width="50dp"
             android:layout_gravity="center"

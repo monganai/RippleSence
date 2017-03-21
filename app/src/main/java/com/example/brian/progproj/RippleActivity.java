@@ -10,6 +10,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -42,7 +45,7 @@ public class RippleActivity extends Activity {
     ArrayList<RippleInstance> farms = new ArrayList<>();
     RippleGridAdapter arrayAdapter;
     String parentFarm = "";
-    float warningPercentage = 50.0f;
+    float warningPercentage = 10.0f;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
@@ -54,8 +57,13 @@ public class RippleActivity extends Activity {
 
         setContentView(R.layout.activity_ripple);
         LinearLayout layout = (LinearLayout)findViewById(R.id.graph_layout);
-        TextView title = (TextView)layout.findViewById(R.id.textView);
-        title.setText(parentFarm);
+        TextView title = (TextView)layout.findViewById(R.id.textViewFarm);
+        String FarmN;
+        SpannableString Farmc;
+        Farmc = new SpannableString(parentFarm);
+        Farmc.setSpan(new RelativeSizeSpan(1f), 0, parentFarm.length(), 0); // set size
+        Farmc.setSpan(new ForegroundColorSpan(Color.parseColor("#1BC2EE")), 0, parentFarm.length(), 0);// set color
+        title.setText(Farmc);
         View root = ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
         root.setBackgroundColor(Color.WHITE);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -77,13 +85,17 @@ public class RippleActivity extends Activity {
                 farms);
         list.setAdapter(arrayAdapter);
 
-        DecoView decoView = (DecoView) findViewById(R.id.dynamicArcView2);
+        DecoView decoView = (DecoView) findViewById(R.id.decoView2);
+        TextView midle = (TextView)  findViewById(R.id.middleMulti);
         ArrayList<Integer> series = new ArrayList<>();
         ArrayList<SeriesItem> seriesItems = new ArrayList<>();
         String[] colours = {"#1BC2EE", "#039CD5", "#4075BB", "#21409A"};
-        String[] greys = {"#D0D0D0", "#B8B8B8"};
+        String[] greys = {"#FFFFFF", "#FFFFFF"};
         if(farms.size() != 0) {
-            float lineWidth = 160 / farms.size();
+            float lineWidth = 200 / farms.size();
+            if(farms.size() == 1)
+                lineWidth = 100;
+
             for (int i = 0; i < farms.size(); i++) {
                 int c = Color.parseColor(colours[i%4]);
 
@@ -101,13 +113,28 @@ public class RippleActivity extends Activity {
                         .setInitialVisibility(false)
                         .setLineWidth(lineWidth)
                         .setSeriesLabel(new SeriesLabel.Builder(farms.get(i).getName() + " %.0f%%")
-                                .setColorBack(Color.argb(218, 0, 0, 0))
-                                .setColorText(Color.argb(255, 255, 255, 255))
-                                .setVisible(true)
+                               .setColorBack(Color.argb(218, 0, 0, 0))
+                               .setColorText(Color.argb(255, 255, 255, 255))
+                                .setVisible(false)
                                 .build())
                         .build();
                 seriesItems.add(seriesItem);
                 series.add(decoView.addSeries(seriesItem));
+
+
+                String middlePercent;
+                SpannableString middleS;
+                int ANS = 76;
+
+
+                middlePercent = "" + (int)ANS + "%";
+                middleS = new SpannableString(middlePercent);
+                middleS.setSpan(new RelativeSizeSpan(3f), 0, middlePercent.length(), 0); // set size
+                middleS.setSpan(new ForegroundColorSpan(Color.parseColor("#1BC2EE")), 0, middlePercent.length(), 0);// set color
+
+                midle.setText(middleS);
+
+
 
             }
             for (int x = 0; x < series.size(); x++) {
@@ -168,12 +195,12 @@ public class RippleActivity extends Activity {
                 }
                 arrayAdapter.notifyDataSetChanged();
             }
-            DecoView decoView = (DecoView) findViewById(R.id.dynamicArcView2);
+            DecoView decoView = (DecoView) findViewById(R.id.decoView2);
             decoView.executeReset();
             ArrayList<Integer> series = new ArrayList<>();
             ArrayList<SeriesItem> seriesItems = new ArrayList<>();
             String[] colours = {"#1BC2EE", "#039CD5", "#4075BB", "#21409A"};
-            String[] greys = {"#D0D0D0", "#B8B8B8"};
+            String[] greys = {"#FFFFFF", "#FFFFFF"};
             float lineWidth = 160/farms.size();
             if(farms.size() < 3)
                 lineWidth = 160/3;

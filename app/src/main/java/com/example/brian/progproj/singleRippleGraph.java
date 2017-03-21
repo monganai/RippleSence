@@ -64,7 +64,7 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
     DecoView decoView;
     private static final String TAG = "ripplesence";
 
-    Button ripple;
+
 
     Handler h;
 
@@ -91,8 +91,12 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+
+        final int Range =100;
+
+
+
+      /*  swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
 
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -112,45 +116,25 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
 
             }
         });
-
+*/
         String initial = "Tap Screen To Begin";
         SpannableString ss;
         TextView a;
 
 
         ss = new SpannableString(initial);
-        ss.setSpan(new RelativeSizeSpan(2f), 0, 19, 0); // set size
-        ss.setSpan(new ForegroundColorSpan(Color.parseColor("#1BC2EE")), 0, 19, 0);// set color
+        ss.setSpan(new RelativeSizeSpan(2f), 0, ss.length(), 0); // set size
+        ss.setSpan(new ForegroundColorSpan(Color.parseColor("#1BC2EE")), 0, ss.length(), 0);// set color
         a = (TextView) findViewById(R.id.textPercentage);
         a.setText(ss);
 
 
         decoView = (DecoView) findViewById(R.id.dynamicArcView);
 
-        final SeriesItem seriesItem = new SeriesItem.Builder((Color.parseColor("#1BC2EE")))
-                .setRange(0, 350, 0)
-                .setInset(new PointF(50f, 50f))
-                .setInterpolator(new AccelerateInterpolator())
-                .setInitialVisibility(false)
-                .setLineWidth(75)
-
-                .build();
 
 
         final TextView textPercentage = (TextView) findViewById(R.id.textPercentage);
-        seriesItem.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
-            @Override
-            public void onSeriesItemAnimationProgress(float percentComplete, float currentPosition) {
-                float percentFilled = ((currentPosition - seriesItem.getMinValue()) / (seriesItem.getMaxValue() - seriesItem.getMinValue()));
-                textPercentage.setText(String.format("%.0f%%", percentFilled * 100f));
-            }
 
-            @Override
-            public void onSeriesItemDisplayProgress(float percentComplete) {
-
-            }
-
-        });
         float answer;
         answer = ANS;
 
@@ -160,7 +144,7 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
             public void handleMessage(android.os.Message msg) {
                 switch (msg.what) {
                     case RECIEVE_MESSAGE:                                                    // if receive massage
-                        swipeContainer.setRefreshing(false);
+                      //  swipeContainer.setRefreshing(false);
                         byte[] readBuf = (byte[]) msg.obj;
                         String strIncom = new String(readBuf, 0, msg.arg1);                    // create string from bytes array
                         sb.append(strIncom);                                                // append string
@@ -169,10 +153,21 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
                             String sbprint = sb.substring(0, endOfLineIndex);                // extract string
                             sb.delete(0, sb.length());// and clear
                             int foo = Integer.parseInt(sbprint);
+
+                            if(foo < 0) {
+                                foo = 0;
+                            }
+
+
+                            else if(foo > Range) {
+                                foo = Range;
+                            }
+                            ANS = foo;
                             float ans = (float) foo;
 
-                            SeriesItem seriesItem = new SeriesItem.Builder((Color.parseColor("#1BC2EE")))
-                                    .setRange(0, 350, 0)
+
+                             SeriesItem seriesItem = new SeriesItem.Builder((Color.parseColor("#1BC2EE")))
+                                    .setRange(0, Range, 0)
                                     .setInset(new PointF(50f, 50f))
                                     .setLineWidth(75)
                                     .build();
@@ -180,11 +175,22 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
                             int series1Index = decoView.addSeries(seriesItem);
 
 
-                            String s;
-                            SpannableString ss1;
-                            TextView tv;
+
+
+
+                            String s,middlePercent;
+                            SpannableString ss1,middleS;
+                            TextView tv,tv1;
 
                             ANS = ans;
+
+                            middlePercent = "" + (int)ANS + "%";
+                            middleS = new SpannableString(middlePercent);
+                            middleS.setSpan(new RelativeSizeSpan(3f), 0, middlePercent.length(), 0); // set size
+                            middleS.setSpan(new ForegroundColorSpan(Color.parseColor("#1BC2EE")), 0, middlePercent.length(), 0);// set color
+                            tv1 = (TextView) findViewById(R.id.textView2);
+                            tv1.setText(middleS);
+
 
 
                             if (ANS > 50) {
@@ -192,14 +198,14 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
 
                                 s = "Everything is ok!";
                                 ss1 = new SpannableString(s);
-                                ss1.setSpan(new RelativeSizeSpan(2f), 0, 17, 0); // set size
-                                ss1.setSpan(new ForegroundColorSpan(Color.parseColor("#1BC2EE")), 0, 17, 0);// set color
+                                ss1.setSpan(new RelativeSizeSpan(2f), 0, s.length(), 0); // set size
+                                ss1.setSpan(new ForegroundColorSpan(Color.parseColor("#1BC2EE")), 0, s.length(), 0);// set color
                                 tv = (TextView) findViewById(R.id.textPercentage);
                                 tv.setText(ss1);
                                 decoView.deleteAll();
 
                                 seriesItem = new SeriesItem.Builder((Color.parseColor("#1BC2EE")))
-                                        .setRange(0, 350, 0)
+                                        .setRange(0, Range, 0)
                                         .setInset(new PointF(50f, 50f))
                                         .setInterpolator(new AccelerateInterpolator())
 
@@ -217,14 +223,14 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
 
                                 s = "Level Low!";
                                 ss1 = new SpannableString(s);
-                                ss1.setSpan(new RelativeSizeSpan(2f), 0, 10, 0); // set size
-                                ss1.setSpan(new ForegroundColorSpan(Color.parseColor("#1BC2EE")), 0, 10, 0);// set color
+                                ss1.setSpan(new RelativeSizeSpan(2f), 0, s.length(), 0); // set size
+                                ss1.setSpan(new ForegroundColorSpan(Color.parseColor("#1BC2EE")), 0, s.length(), 0);// set color
                                 tv = (TextView) findViewById(R.id.textPercentage);
                                 tv.setText(ss1);
                                 decoView.deleteAll();
 
                                 seriesItem = new SeriesItem.Builder((Color.parseColor("#1BC2EE")))
-                                        .setRange(0, 350, 0)
+                                        .setRange(0, Range, 0)
                                         .setLineWidth(75)
                                         .setInset(new PointF(50f, 50f))
                                         .build();
@@ -239,15 +245,15 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
 
                                 s = "Level is Critical";
                                 ss1 = new SpannableString(s);
-                                ss1.setSpan(new RelativeSizeSpan(2f), 0, 17, 0); // set size
-                                ss1.setSpan(new ForegroundColorSpan(Color.RED), 0, 17, 0);// set color
+                                ss1.setSpan(new RelativeSizeSpan(2f), 0, s.length(), 0); // set size
+                                ss1.setSpan(new ForegroundColorSpan(Color.RED), 0, s.length(), 0);// set color
                                 tv = (TextView) findViewById(R.id.textPercentage);
                                 tv.setText(ss1);
 
                                 decoView.deleteAll();
 
                                 seriesItem = new SeriesItem.Builder((Color.RED))
-                                        .setRange(0, 350, 0)
+                                        .setRange(0, Range, 0)
                                         .setInset(new PointF(50f, 50f))
                                         .setLineWidth(75)
                                         .build();
@@ -290,18 +296,18 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
 
         textPercentage.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                //ripple.setEnabled(false);
-                mConnectedThread.write("ripple");    // Send "1" via Bluetooth
 
-                // Toast.makeText(getBaseContext(), "DATA REQUESTED", Toast.LENGTH_SHORT).show();
+                mConnectedThread.write("ripple");    // Send ripple via Bluetooth
+
+
             }
         });
 
         decoView.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                //ripple.setEnabled(false);
-                mConnectedThread.write("ripple");    // Send "1" via Bluetooth
-                //Toast.makeText(getBaseContext(), "Turn on LED", Toast.LENGTH_SHORT).show();
+
+                mConnectedThread.write("ripple");    // Send ripple via Bluetooth
+
             }
         });
 
@@ -329,10 +335,7 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
         // Set up a pointer to the remote node using it's address.
         BluetoothDevice device = btAdapter.getRemoteDevice(address);
 
-        // Two things are needed to make a connection:
-        //   A MAC address, which we got above.
-        //   A Service ID or UUID.  In this case we are using the
-        //     UUID for SPP.
+
 
         try {
             btSocket = createBluetoothSocket(device);
@@ -340,14 +343,9 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
             errorExit("Fatal Error", "In onResume() and socket create failed: " + e.getMessage() + ".");
         }
 
-    /*try {
-      btSocket = device.createRfcommSocketToServiceRecord(MY_UUID);
-    } catch (IOException e) {
-      errorExit("Fatal Error", "In onResume() and socket create failed: " + e.getMessage() + ".");
-    }*/
 
-        // Discovery is resource intensive.  Make sure it isn't going on
-        // when you attempt to connect and pass your message.
+
+
         btAdapter.cancelDiscovery();
 
         // Establish the connection.  This will block until it connects.
@@ -406,9 +404,9 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
     }
 
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+       @SuppressWarnings("StatementWithEmptyBody")
+            @Override
+           public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         BlankFragment fragment = new BlankFragment();
@@ -435,7 +433,7 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
+   }
 
 
     private class ConnectedThread extends Thread {
