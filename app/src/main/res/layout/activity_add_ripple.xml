@@ -21,8 +21,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_add_ripple" />
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
@@ -32,5 +30,7 @@
         app:srcCompat="@drawable/ic_check_black_24dp"
         app:backgroundTint="@android:color/holo_blue_bright"
         android:onClick = "onClick" />
+
+    <include layout="@layout/content_add_ripple" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -10,6 +10,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -25,6 +26,9 @@ public class AddRippleActivity extends AppCompatActivity {
 
     Bitmap icon;
     String parentFarm = "";
+
+    EditText height;
+    EditText depth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +37,9 @@ public class AddRippleActivity extends AppCompatActivity {
             parentFarm = b.getString("farm");
         setContentView(R.layout.activity_add_ripple);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+         height = (EditText) findViewById(R.id.Heightb) ;
+         depth = (EditText) findViewById(R.id.depthb) ;
+
         setSupportActionBar(toolbar);
         ImagePicker.setMinQuality(600, 600);
     }
@@ -72,6 +79,13 @@ public class AddRippleActivity extends AppCompatActivity {
         RippleInstance r = new RippleInstance(textbox.getText().toString(), Bitmap.createScaledBitmap(icon, 128,  icon.getHeight()/(icon.getWidth()/128), false));
         Random q = new Random();
         r.waterLevel = q.nextInt(100);
+
+        r.Depth = Integer.parseInt(depth.getText().toString());
+        r.RippleHeight = Integer.parseInt(height.getText().toString());
+        Log.d("depth" , r.Depth + "");
+        Log.d("height" , r.RippleHeight + "");
+
+
         String farmName = r.toString();
         farms.add(farmName);
         db.putListString(parentFarm + "_ripple", farms);

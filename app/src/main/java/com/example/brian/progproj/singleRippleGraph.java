@@ -11,6 +11,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
+import android.util.Range;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -48,6 +49,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.hookedonplay.decoviewlib.DecoView;
 import com.hookedonplay.decoviewlib.charts.SeriesItem;
 import com.hookedonplay.decoviewlib.charts.SeriesLabel;
@@ -63,6 +65,8 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
     float ANS = 0;
     DecoView decoView;
     private static final String TAG = "ripplesence";
+    int height;
+    int depth;
 
 
 
@@ -92,31 +96,33 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
         setContentView(R.layout.activity_main2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        final int Range =100;
+        Bundle b = getIntent().getExtras();
 
 
 
-      /*  swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
 
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mConnectedThread.write("ripple");
-                Toast.makeText(getApplicationContext(), "refresh", Toast.LENGTH_SHORT);
-                final Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        if(swipeContainer.isRefreshing()){
-                            swipeContainer.setRefreshing(false);
-                            Snackbar.make(findViewById(android.R.id.content), "Failed to get Ripple Data" , Snackbar.LENGTH_LONG).setDuration(1800).show();
-                        }
-                    }
-                }, 3000);
+           String str =  b.getString("ripple");
+            RippleInstance thisone = new Gson().fromJson(str,RippleInstance.class);
 
-            }
-        });
-*/
+
+            int height = thisone.Depth;     // 40
+
+          final int  Range = thisone.RippleHeight;       // 50
+
+            final int offset = Range - height;  // 10
+
+
+
+
+        Log.e("depth + arduono", Range + "") ;
+        Log.e("water depth", height + "") ;
+        Log.e("offset", offset + "") ;
+
+
+
+
+
+
         String initial = "Tap Screen To Begin";
         SpannableString ss;
         TextView a;
@@ -135,8 +141,7 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
 
         final TextView textPercentage = (TextView) findViewById(R.id.textPercentage);
 
-        float answer;
-        answer = ANS;
+
 
 
         //  ripple = (Button) findViewById(R.id.ripple);                    // button LED ON
@@ -146,24 +151,78 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
                     case RECIEVE_MESSAGE:                                                    // if receive massage
                       //  swipeContainer.setRefreshing(false);
                         byte[] readBuf = (byte[]) msg.obj;
-                        String strIncom = new String(readBuf, 0, msg.arg1);                    // create string from bytes array
-                        sb.append(strIncom);                                                // append string
-                        int endOfLineIndex = sb.indexOf("\r\n");                            // determine the end-of-line
+                        String strIncom = new String(readBuf, 0, msg.arg1);                   // create string from bytes array
+                        sb.append(strIncom);                                                 // append string
+                        int endOfLineIndex = sb.indexOf("\r\n");                             // determine the end-of-line
                         if (endOfLineIndex > 0) {                                            // if end-of-line,
                             String sbprint = sb.substring(0, endOfLineIndex);                // extract string
                             sb.delete(0, sb.length());// and clear
-                            int foo = Integer.parseInt(sbprint);
 
-                            if(foo < 0) {
-                                foo = 0;
+
+                            if(sbprint.equals("")){
+                                mConnectedThread.write("ripple");
+
+
                             }
 
 
-                            else if(foo > Range) {
-                                foo = Range;
+                            int arduino = Integer.parseInt(sbprint);   ///   value
+
+                            Log.e("arduino input", arduino+ "");
+
+
+
+
+
+
+
+
+
+
+                            int ardlessoff = arduino - offset;    //  20 -10 = 10
+                            Log.e("arduino input - offset", ardlessoff + "") ;
+
+
+
+                            int fract = Range - ardlessoff;      // 40 -10 = 30
+                            Log.e("range - ardlessoff", fract + "") ;
+                            ///  30/ 40 == 75%
+
+                            if (fract < 0){
+                                fract = 0;
                             }
-                            ANS = foo;
-                            float ans = (float) foo;
+
+                            if (fract > Range){
+                                fract = Range;
+                            }
+
+
+                            float fractF = (float)fract;
+                            float RangeF = (float)Range;
+
+                            Float perc = fractF/RangeF;
+                            float perc1 = perc * 100;
+                            Log.e("per float", perc1 + "") ;
+
+                            int init = (int)perc1;
+
+
+
+                            if (init > 100){
+                                init = 100;
+                            }
+
+                            if(init < 0){
+                                init = 0;
+                            }
+
+                            Log.e("final percent", init + "") ;
+
+
+
+
+
+
 
 
                              SeriesItem seriesItem = new SeriesItem.Builder((Color.parseColor("#1BC2EE")))
@@ -182,9 +241,10 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
                             SpannableString ss1,middleS;
                             TextView tv,tv1;
 
-                            ANS = ans;
 
-                            middlePercent = "" + (int)ANS + "%";
+
+
+                            middlePercent = "" + init + "%";
                             middleS = new SpannableString(middlePercent);
                             middleS.setSpan(new RelativeSizeSpan(3f), 0, middlePercent.length(), 0); // set size
                             middleS.setSpan(new ForegroundColorSpan(Color.parseColor("#1BC2EE")), 0, middlePercent.length(), 0);// set color
@@ -193,15 +253,21 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
 
 
 
-                            if (ANS > 50) {
+
+
+
+
+                            if (init > 50) {
 
 
                                 s = "Everything is ok!";
+
                                 ss1 = new SpannableString(s);
                                 ss1.setSpan(new RelativeSizeSpan(2f), 0, s.length(), 0); // set size
                                 ss1.setSpan(new ForegroundColorSpan(Color.parseColor("#1BC2EE")), 0, s.length(), 0);// set color
                                 tv = (TextView) findViewById(R.id.textPercentage);
                                 tv.setText(ss1);
+
                                 decoView.deleteAll();
 
                                 seriesItem = new SeriesItem.Builder((Color.parseColor("#1BC2EE")))
@@ -213,12 +279,12 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
                                         .build();
 
                                 series1Index = decoView.addSeries(seriesItem);
-                                decoView.addEvent(new DecoEvent.Builder(ans)
+                                decoView.addEvent(new DecoEvent.Builder(fract)
                                         .setIndex(series1Index)
 
                                         .setDelay(1000)
                                         .build());
-                            } else if (ANS < 50 && ANS > 20) {
+                            } else if (init<50 && init >20) {
 
 
                                 s = "Level Low!";
@@ -236,11 +302,11 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
                                         .build();
 
                                 series1Index = decoView.addSeries(seriesItem);
-                                decoView.addEvent(new DecoEvent.Builder(ans)
+                                decoView.addEvent(new DecoEvent.Builder(fract)
                                         .setIndex(series1Index)
                                         .setDelay(1000)
                                         .build());
-                            } else if (ANS < 20) {
+                            } else if (init <20 ) {
 
 
                                 s = "Level is Critical";
@@ -259,26 +325,13 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
                                         .build();
 
                                 series1Index = decoView.addSeries(seriesItem);
-                                decoView.addEvent(new DecoEvent.Builder(ans)
+                                decoView.addEvent(new DecoEvent.Builder(fract)
                                         .setIndex(series1Index)
                                         .setDelay(1000)
                                         .build());
                             }
 
-                       /* if (ANS<4) {
-                            s = "Temperature is below 0";
-                            ss1 = new SpannableString(s);
-                            ss1.setSpan(new RelativeSizeSpan(2f), 0, 14, 0); // set size
-                            ss1.setSpan(new ForegroundColorSpan(Color.RED), 0, 14, 0);// set color
-                            tv = (TextView) findViewById(R.id.textPercentage);
-                            tv.setText(ss1);
-                        }
-*/
 
-
-                            //  textPercentage.setText("D" + ans);// update TextView
-
-                            //ripple.setEnabled(true);
                         }
                         //Log.d(TAG, "...String:"+ sb.toString() +  "Byte:" + msg.arg1 + "...");
                         break;

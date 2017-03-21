@@ -57,11 +57,11 @@ public class RippleGridAdapter extends BaseAdapter {
         CircularImageView imageView = (CircularImageView) grid.findViewById(R.id.grid_image);
         imageView.setImageBitmap(getItem(position).getImage());
         imageView.setBorderColor(Color.parseColor(colours[position%4]));
-        final String address = getItem(position).getAddress();
+        final String address = getItem(position).toString();
         imageView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, singleRippleGraph.class);
-                intent.putExtra("macAddress", address);
+                intent.putExtra("ripple", address);
                 mContext.startActivity(intent);
             }
         });

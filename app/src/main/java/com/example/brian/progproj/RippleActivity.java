@@ -121,15 +121,22 @@ public class RippleActivity extends Activity {
                 seriesItems.add(seriesItem);
                 series.add(decoView.addSeries(seriesItem));
 
-
+                int ANS=0;
                 String middlePercent;
                 SpannableString middleS;
-                int ANS = 76;
+                for(int z =0;z<series.size();z++){
+                    ANS = ANS + farms.get(z).waterLevel;
+                    decoView.addEvent(new DecoEvent.Builder(farms.get(z).waterLevel)
+                            .setIndex(series.get(z))
+                            .setDelay(1000)
+                            .build());
+                }
+                ANS = ANS/farms.size();
 
 
                 middlePercent = "" + (int)ANS + "%";
                 middleS = new SpannableString(middlePercent);
-                middleS.setSpan(new RelativeSizeSpan(3f), 0, middlePercent.length(), 0); // set size
+                middleS.setSpan(new RelativeSizeSpan(2f), 0, middlePercent.length(), 0); // set size
                 middleS.setSpan(new ForegroundColorSpan(Color.parseColor("#1BC2EE")), 0, middlePercent.length(), 0);// set color
 
                 midle.setText(middleS);
@@ -137,12 +144,7 @@ public class RippleActivity extends Activity {
 
 
             }
-            for (int x = 0; x < series.size(); x++) {
-                decoView.addEvent(new DecoEvent.Builder(farms.get(x).waterLevel)
-                        .setIndex(series.get(x))
-                        .setDelay(1000)
-                        .build());
-            }
+
         }
     }
 
@@ -222,8 +224,7 @@ public class RippleActivity extends Activity {
                         .setLineWidth(lineWidth)
                         .build());
 
-                seriesItems.add(seriesItem);
-                series.add(decoView.addSeries(seriesItem));
+
 
             }
             for(int x = 0; x < series.size(); x++){

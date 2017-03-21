@@ -12,30 +12,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/exploded-aar/com.android.support/transition/25.1.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="d38084015027549951cbaea5d5f6fb795cc81151">
-        <dex dex="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-transition-25.1.0_369937ddbfc5db4f9d436974e527d5ce48cacdb0/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.1.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
         sha1="f02263e35e52668dd17b73bf961437e3d562b35f">
         <dex dex="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-25.1.0_579fa62debb3c84fa77b30276933e10a462a078a/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.1.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="2a53c4f3518116b8c6aee0e477233f0f7da8616f">
-        <dex dex="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-fragment-25.1.0_4db7bad2bc9a907334a0a5ff464ae8f2307afa93/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -48,30 +30,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="/home/aidan/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.0/c4ba5371a29ac9b2ad6129b1d39ea38750043eff/gson-2.8.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="c4ba5371a29ac9b2ad6129b1d39ea38750043eff">
-        <dex dex="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/transforms/dex/debug/folders/1000/10/gson-2.8.0_02dd3abfa552131d5bf6413bfc4df2d50e46a6b7/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="8d1a897a49229b1883866b31b67bd94e02cb03ce">
+        sha1="d46790569be3f5d3cb279e1779d030f918edb427">
         <dex dex="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_38c059f3b7e7cd2503b5a10349c4886010e62785/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/exploded-aar/com.mikhaellopez/circularimageview/3.0.2/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="a8340f8c17337c864648c13abe1416d34c80ec14">
-        <dex dex="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.mikhaellopez-circularimageview-3.0.2_ec5fac08e9e36b2b1b877366e35406bfcda4c22a/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -81,24 +45,6 @@
         revision="25.0.2"
         sha1="30103d98fa5ed824b54af839c85e2111f9bde8ec">
         <dex dex="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-25.1.0_1f972d73267c3fb5f417ecaf24f8fb2f40fc51be/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.1.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="e79aa3d9a16f8c9f16377c0608de70a8f31e5d80">
-        <dex dex="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-25.1.0_6593b8efc2d39dd3562d109696e19467278870d2/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.1.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="aee64634871d88a419d59eb743c1258a60f19700">
-        <dex dex="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-ui-25.1.0_ced506bce4950802f317b64151bad3d9f2391264/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -120,15 +66,6 @@
     </item>
     <item
         is-multidex="true"
-        jar="/home/aidan/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/25.1.0/support-annotations-25.1.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="64cb6b229a8bdfd907bc8dd46839a0053e4c018d">
-        <dex dex="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-25.1.0_9d08338bafe363844047d68dda45d05ef0b52379/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.1.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
@@ -144,15 +81,6 @@
         revision="25.0.2"
         sha1="d3db3fc2b65bcb63276a455085d4f4884cdadb44">
         <dex dex="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.github.bmarrdev-android-DecoView-charting-v1.2_2955d9cfa5ff1d2d0fd336445812cc5b1a6e81f5/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.1.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="6fb6ac3e8d3b9013819920d9ea11f3803c4c0033">
-        <dex dex="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-25.1.0_d9e55ee01e435705a431fccd57b5d4130085cb9b/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -174,11 +102,83 @@
     </item>
     <item
         is-multidex="true"
+        jar="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/exploded-aar/com.android.support/transition/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d38084015027549951cbaea5d5f6fb795cc81151">
+        <dex dex="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-transition-25.1.0_369937ddbfc5db4f9d436974e527d5ce48cacdb0/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="2a53c4f3518116b8c6aee0e477233f0f7da8616f">
+        <dex dex="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-fragment-25.1.0_4db7bad2bc9a907334a0a5ff464ae8f2307afa93/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/aidan/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.0/c4ba5371a29ac9b2ad6129b1d39ea38750043eff/gson-2.8.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c4ba5371a29ac9b2ad6129b1d39ea38750043eff">
+        <dex dex="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/transforms/dex/debug/folders/1000/10/gson-2.8.0_02dd3abfa552131d5bf6413bfc4df2d50e46a6b7/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/exploded-aar/com.mikhaellopez/circularimageview/3.0.2/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="a8340f8c17337c864648c13abe1416d34c80ec14">
+        <dex dex="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.mikhaellopez-circularimageview-3.0.2_ec5fac08e9e36b2b1b877366e35406bfcda4c22a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e79aa3d9a16f8c9f16377c0608de70a8f31e5d80">
+        <dex dex="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-25.1.0_6593b8efc2d39dd3562d109696e19467278870d2/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="aee64634871d88a419d59eb743c1258a60f19700">
+        <dex dex="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-ui-25.1.0_ced506bce4950802f317b64151bad3d9f2391264/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/aidan/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/25.1.0/support-annotations-25.1.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="64cb6b229a8bdfd907bc8dd46839a0053e4c018d">
+        <dex dex="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-25.1.0_9d08338bafe363844047d68dda45d05ef0b52379/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="6fb6ac3e8d3b9013819920d9ea11f3803c4c0033">
+        <dex dex="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-25.1.0_d9e55ee01e435705a431fccd57b5d4130085cb9b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="898f8312d4db19c6459ebd6ceb01221ac8d6339c">
+        sha1="716520d63925e63ed0d81afa2f39dabd4ec32933">
         <dex dex="/home/aidan/Desktop/tuesday/Ripple/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_089313fd4888df36150fc6397fd697705afc3d43/classes.dex" />
     </item>
 
