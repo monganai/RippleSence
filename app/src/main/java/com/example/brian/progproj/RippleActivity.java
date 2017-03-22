@@ -62,7 +62,7 @@ public class RippleActivity extends Activity {
         SpannableString Farmc;
         Farmc = new SpannableString(parentFarm);
         Farmc.setSpan(new RelativeSizeSpan(1f), 0, parentFarm.length(), 0); // set size
-        Farmc.setSpan(new ForegroundColorSpan(Color.parseColor("#1BC2EE")), 0, parentFarm.length(), 0);// set color
+        Farmc.setSpan(new ForegroundColorSpan(Color.WHITE), 0, parentFarm.length(), 0);// set color
         title.setText(Farmc);
         View root = ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
         root.setBackgroundColor(Color.WHITE);
@@ -92,18 +92,18 @@ public class RippleActivity extends Activity {
         String[] colours = {"#1BC2EE", "#039CD5", "#4075BB", "#21409A"};
         String[] greys = {"#FFFFFF", "#FFFFFF"};
         if(farms.size() != 0) {
-            float lineWidth = 200 / farms.size();
+            float lineWidth = 150 / farms.size();
             if(farms.size() == 1)
-                lineWidth = 100;
+                lineWidth = 50;
 
             for (int i = 0; i < farms.size(); i++) {
                 int c = Color.parseColor(colours[i%4]);
 
                 if(farms.get(i).waterLevel < warningPercentage)
-                    c = Color.parseColor("#8b0000");
+                    c = Color.RED;
                 decoView.addSeries(new SeriesItem.Builder(Color.parseColor(greys[i % greys.length]))
                         .setRange(0, 100, 100)
-                        .setInset(new PointF(50f + (lineWidth * i), 50f + (lineWidth * i)))
+                        .setInset(new PointF(1000f + (lineWidth * i), 50f + (lineWidth * i)))
                         .setInitialVisibility(true)
                         .setLineWidth(lineWidth)
                         .build());
@@ -210,7 +210,7 @@ public class RippleActivity extends Activity {
                 int c = Color.parseColor(colours[i%4]);
 
                 if(farms.get(i).waterLevel < warningPercentage)
-                    c = Color.parseColor("#8b0000");
+                    c = Color.RED;
                 final SeriesItem seriesItem = new SeriesItem.Builder((c))
                         .setRange(0, 100, 0)
                         .setInset(new PointF(50f + (lineWidth * i), 50f + (lineWidth * i)))

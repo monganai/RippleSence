@@ -179,12 +179,12 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
 
 
 
-                            int ardlessoff = arduino - offset;    //  20 -10 = 10
-                            Log.e("arduino input - offset", ardlessoff + "") ;
+                           // int ardlessoff = arduino - offset;    //  20 -10 = 10
+                            //Log.e("arduino input - offset", ardlessoff + "") ;
 
 
 
-                            int fract = Range - ardlessoff;      // 40 -10 = 30
+                            int fract = Range - arduino;      // 40 -10 = 30
                             Log.e("range - ardlessoff", fract + "") ;
                             ///  30/ 40 == 75%
 
