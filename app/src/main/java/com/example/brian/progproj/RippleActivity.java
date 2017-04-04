@@ -2,39 +2,29 @@ package com.example.brian.progproj;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.PointF;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
 import com.hookedonplay.decoviewlib.DecoView;
 import com.hookedonplay.decoviewlib.charts.SeriesItem;
 import com.hookedonplay.decoviewlib.charts.SeriesLabel;
 import com.hookedonplay.decoviewlib.events.DecoEvent;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.Random;
 
 
 public class RippleActivity extends Activity {
@@ -62,7 +52,7 @@ public class RippleActivity extends Activity {
         SpannableString Farmc;
         Farmc = new SpannableString(parentFarm);
         Farmc.setSpan(new RelativeSizeSpan(1f), 0, parentFarm.length(), 0); // set size
-        Farmc.setSpan(new ForegroundColorSpan(Color.GRAY), 0, parentFarm.length(), 0);// set color
+        Farmc.setSpan(new ForegroundColorSpan(Color.WHITE), 0, parentFarm.length(), 0);// set color
         title.setText(Farmc);
         View root = ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
         root.setBackgroundColor(Color.WHITE);
@@ -90,9 +80,9 @@ public class RippleActivity extends Activity {
         ArrayList<Integer> series = new ArrayList<>();
         ArrayList<SeriesItem> seriesItems = new ArrayList<>();
         String[] colours = {"#1BC2EE", "#039CD5", "#4075BB", "#21409A"};
-        String[] greys = {"#FFFFFF", "#FFFFFF"};
+
         if(farms.size() != 0) {
-            float lineWidth = 150 / farms.size();
+            float lineWidth = 200 / farms.size();
             if(farms.size() == 1)
                 lineWidth = 50;
 
@@ -101,12 +91,7 @@ public class RippleActivity extends Activity {
 
                 if(farms.get(i).waterLevel < warningPercentage)
                     c = Color.RED;
-                decoView.addSeries(new SeriesItem.Builder(Color.parseColor(greys[i % greys.length]))
-                        .setRange(0, 100, 100)
-                        .setInset(new PointF(1000f + (lineWidth * i), 50f + (lineWidth * i)))
-                        .setInitialVisibility(true)
-                        .setLineWidth(lineWidth)
-                        .build());
+
                 final SeriesItem seriesItem = new SeriesItem.Builder(c)
                         .setRange(0, 100, 0)
                         .setInset(new PointF(50f + (lineWidth * i), 50f + (lineWidth * i)))
@@ -202,7 +187,7 @@ public class RippleActivity extends Activity {
             ArrayList<Integer> series = new ArrayList<>();
             ArrayList<SeriesItem> seriesItems = new ArrayList<>();
             String[] colours = {"#1BC2EE", "#039CD5", "#4075BB", "#21409A"};
-            String[] greys = {"#FFFFFF", "#FFFFFF"};
+
             float lineWidth = 160/farms.size();
             if(farms.size() < 3)
                 lineWidth = 160/3;
@@ -217,12 +202,6 @@ public class RippleActivity extends Activity {
                         .setInitialVisibility(false)
                         .setLineWidth(lineWidth)
                         .build();
-                decoView.addSeries(new SeriesItem.Builder(Color.parseColor(greys[i % greys.length]))
-                        .setRange(0, 100, 100)
-                        .setInset(new PointF(50f + (lineWidth * i), 50f + (lineWidth * i)))
-                        .setInitialVisibility(true)
-                        .setLineWidth(lineWidth)
-                        .build());
 
 
 

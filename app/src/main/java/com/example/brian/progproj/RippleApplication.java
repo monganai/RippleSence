@@ -1,8 +1,6 @@
 package com.example.brian.progproj;
 
 import android.app.Application;
-
-import menu.*;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 /**

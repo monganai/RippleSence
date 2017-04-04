@@ -1,26 +1,31 @@
 package com.example.brian.progproj;
 
-import android.app.Application;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
+import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.PointF;
-import android.support.v4.app.Fragment;
-import android.app.FragmentManager;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
-import android.util.Range;
+import android.util.Log;
 import android.view.View;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View.OnClickListener;
+import android.view.animation.AccelerateInterpolator;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.hookedonplay.decoviewlib.DecoView;
+import com.hookedonplay.decoviewlib.charts.SeriesItem;
+import com.hookedonplay.decoviewlib.events.DecoEvent;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,39 +33,9 @@ import java.io.OutputStream;
 import java.lang.reflect.Method;
 import java.util.UUID;
 
-import android.app.Activity;
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothSocket;
-import android.content.Intent;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.animation.AccelerateInterpolator;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.graphics.Color;
-import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.hookedonplay.decoviewlib.DecoView;
-import com.hookedonplay.decoviewlib.charts.SeriesItem;
-import com.hookedonplay.decoviewlib.charts.SeriesLabel;
-import com.hookedonplay.decoviewlib.events.DecoEvent;
 
-import menu.BlankFragment;
-import menu.DetailFragment;
-
-import static android.R.attr.delay;
-
-public class singleRippleGraph extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class singleRippleGraph extends AppCompatActivity  {
 
     float ANS = 0;
     DecoView decoView;
@@ -101,15 +76,15 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
 
 
 
-           String str =  b.getString("ripple");
-            RippleInstance thisone = new Gson().fromJson(str,RippleInstance.class);
+        String str =  b.getString("ripple");
+        RippleInstance thisone = new Gson().fromJson(str,RippleInstance.class);
 
 
-            int height = thisone.Depth;     // 40
+        int height = thisone.Depth;     // 40
 
-          final int  Range = thisone.RippleHeight;       // 50
+        final int  Range = thisone.RippleHeight;       // 50
 
-            final int offset = Range - height;  // 10
+        final int offset = Range - height;  // 10
 
 
 
@@ -117,11 +92,6 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
         Log.e("depth + arduono", Range + "") ;
         Log.e("water depth", height + "") ;
         Log.e("offset", offset + "") ;
-
-
-
-
-
 
         String initial = "Tap Screen To Begin";
         SpannableString ss;
@@ -149,7 +119,7 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
             public void handleMessage(android.os.Message msg) {
                 switch (msg.what) {
                     case RECIEVE_MESSAGE:                                                    // if receive massage
-                      //  swipeContainer.setRefreshing(false);
+                        //  swipeContainer.setRefreshing(false);
                         byte[] readBuf = (byte[]) msg.obj;
                         String strIncom = new String(readBuf, 0, msg.arg1);                   // create string from bytes array
                         sb.append(strIncom);                                                 // append string
@@ -169,20 +139,6 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
                             int arduino = Integer.parseInt(sbprint);   ///   value
 
                             Log.e("arduino input", arduino+ "");
-
-
-
-
-
-
-
-
-
-
-                           // int ardlessoff = arduino - offset;    //  20 -10 = 10
-                            //Log.e("arduino input - offset", ardlessoff + "") ;
-
-
 
                             int fract = Range - arduino;      // 40 -10 = 30
                             Log.e("range - ardlessoff", fract + "") ;
@@ -220,12 +176,7 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
 
 
 
-
-
-
-
-
-                             SeriesItem seriesItem = new SeriesItem.Builder((Color.parseColor("#1BC2EE")))
+                            SeriesItem seriesItem = new SeriesItem.Builder((Color.parseColor("#1BC2EE")))
                                     .setRange(0, Range, 0)
                                     .setInset(new PointF(50f, 50f))
                                     .setLineWidth(75)
@@ -250,12 +201,6 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
                             middleS.setSpan(new ForegroundColorSpan(Color.parseColor("#1BC2EE")), 0, middlePercent.length(), 0);// set color
                             tv1 = (TextView) findViewById(R.id.textView2);
                             tv1.setText(middleS);
-
-
-
-
-
-
 
                             if (init > 50) {
 
@@ -333,7 +278,7 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
 
 
                         }
-                        //Log.d(TAG, "...String:"+ sb.toString() +  "Byte:" + msg.arg1 + "...");
+
                         break;
                 }
 
@@ -457,36 +402,6 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
     }
 
 
-       @SuppressWarnings("StatementWithEmptyBody")
-            @Override
-           public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-        BlankFragment fragment = new BlankFragment();
-        DetailFragment detailFragment = new DetailFragment();
-
-        // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getFragmentManager();
-
-
-        if (id == R.id.nav_home) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.content_main, fragment)
-                    .commit();
-        } else if (id == R.id.nav_add) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.content_main, detailFragment)
-                    .commit();
-        } else if (id == R.id.nav_settings) {
-
-        } else if (id == R.id.nav_about) {
-
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-   }
 
 
     private class ConnectedThread extends Thread {
@@ -497,8 +412,6 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
             InputStream tmpIn = null;
             OutputStream tmpOut = null;
 
-            // Get the input and output streams, using temp objects because
-            // member streams are final
             try {
                 tmpIn = socket.getInputStream();
                 tmpOut = socket.getOutputStream();
@@ -540,11 +453,7 @@ public class singleRippleGraph extends AppCompatActivity implements NavigationVi
 
     }
 
-    public void snd() {
-
-        mConnectedThread.write("ripple");
-
-    }
+   
 
 
 }

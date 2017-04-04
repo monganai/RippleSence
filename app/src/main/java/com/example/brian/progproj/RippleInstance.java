@@ -7,7 +7,6 @@ import android.util.Base64;
 import com.google.gson.GsonBuilder;
 
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
 
 /**
  * Created by brian on 16/02/2017.

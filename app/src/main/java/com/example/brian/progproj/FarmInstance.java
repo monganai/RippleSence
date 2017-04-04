@@ -5,7 +5,6 @@ import android.graphics.BitmapFactory;
 import android.util.Base64;
 
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
 
 /**
  * Created by brian on 16/02/2017.
