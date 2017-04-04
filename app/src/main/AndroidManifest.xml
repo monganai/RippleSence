@@ -6,6 +6,11 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:name=".RippleApplication"
         android:allowBackup="true"
@@ -19,14 +24,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".FarmActivity"
-            android:label="@string/title_activity_farm"
-            android:theme="@style/splashScreenTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:label="@string/title_activity_farm"></activity>
         <activity
             android:name=".AddFarmActivity"
             android:label="@string/title_activity_add_farm"
@@ -39,7 +37,18 @@
             android:name=".AddRippleActivity"
             android:label="@string/title_activity_add_ripple"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".singleRippleGraph"></activity>
+        <activity android:name=".singleRippleGraph" />
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login"
+            android:theme="@style/splashScreenTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".EmailActivity"></activity>
     </application>
 
 </manifest>

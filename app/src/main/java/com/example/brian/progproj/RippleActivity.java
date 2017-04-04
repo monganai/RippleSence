@@ -62,7 +62,7 @@ public class RippleActivity extends Activity {
         SpannableString Farmc;
         Farmc = new SpannableString(parentFarm);
         Farmc.setSpan(new RelativeSizeSpan(1f), 0, parentFarm.length(), 0); // set size
-        Farmc.setSpan(new ForegroundColorSpan(Color.WHITE), 0, parentFarm.length(), 0);// set color
+        Farmc.setSpan(new ForegroundColorSpan(Color.GRAY), 0, parentFarm.length(), 0);// set color
         title.setText(Farmc);
         View root = ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
         root.setBackgroundColor(Color.WHITE);
