@@ -52,7 +52,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="cdacdb20ac1d502344ea3acd7edec06577aeccc2">
+        sha1="be1debcf621e8c96eb219a9fb00b22a280137cbb">
         <dex dex="/home/aidan/Desktop/Ripple/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_33c08fe5b423a8400eacfa8f323d1ba86d5d26b7/classes.dex" />
     </item>
     <item
@@ -66,15 +66,6 @@
     </item>
     <item
         is-multidex="true"
-        jar="/home/aidan/Desktop/Ripple/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/25.1.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="b266c8faa5af72e579b9da36ef35053ffed6ac64">
-        <dex dex="/home/aidan/Desktop/Ripple/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-25.1.0_a8d9b174314e5629bb4c90a4ee436e6c19b5cdbd/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/home/aidan/Desktop/Ripple/app/build/intermediates/exploded-aar/com.android.support/design/25.1.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
@@ -84,12 +75,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="/home/aidan/Desktop/Ripple/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/jars/classes.jar"
+        jar="/home/aidan/Desktop/Ripple/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/25.1.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="1630658fbc2d222b988603c27b4a4249586fbfe7">
-        <dex dex="/home/aidan/Desktop/Ripple/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-25.1.0_f81d3cf0b16e2263ab466c8acf2742e551efbe6c/classes.dex" />
+        sha1="b266c8faa5af72e579b9da36ef35053ffed6ac64">
+        <dex dex="/home/aidan/Desktop/Ripple/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-25.1.0_a8d9b174314e5629bb4c90a4ee436e6c19b5cdbd/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -106,8 +97,17 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="289e9e8ca5f3633f940fa3ba0b7b1d3170dc11e7">
+        sha1="ef234b7c03fdc7076214a74618f91bc22949f007">
         <dex dex="/home/aidan/Desktop/Ripple/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_6a133917ddfa75a7874dda89158fa8146ec4a887/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/aidan/Desktop/Ripple/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="1630658fbc2d222b988603c27b4a4249586fbfe7">
+        <dex dex="/home/aidan/Desktop/Ripple/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-25.1.0_f81d3cf0b16e2263ab466c8acf2742e551efbe6c/classes.dex" />
     </item>
     <item
         is-multidex="true"

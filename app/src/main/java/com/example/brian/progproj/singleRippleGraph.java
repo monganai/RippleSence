@@ -68,7 +68,7 @@ public class singleRippleGraph extends AppCompatActivity  {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.single_ripple);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         Bundle b = getIntent().getExtras();
@@ -453,7 +453,7 @@ public class singleRippleGraph extends AppCompatActivity  {
 
     }
 
-   
+
 
 
 }

@@ -30,7 +30,7 @@ public class EmailActivity extends AppCompatActivity {
         sendEmailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String toemailAddress = emailAddress.getText().toString();
+                String toemailAddress = "Ripple@Ripplesupport.com";
                 String msubject = emailSubject.getText().toString();
                 String mmessage = message.getText().toString();
 
