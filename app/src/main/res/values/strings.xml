@@ -15,7 +15,7 @@
     <string name="title_activity_add_farm">New Farm</string>
     <string name="title_activity_ripple">RippleActivity</string>
     <string name="title_activity_add_ripple">AddRippleActivity</string>
-    <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_login">RippleSence</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
