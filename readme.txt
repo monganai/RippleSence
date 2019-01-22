@@ -8,6 +8,14 @@
                "      "                                               
 
 
+***** Migrated From https://gitlab.scss.tcd.ie/monganai/Ripple/tree/mergeBranch *****
+
+                   ***Contributers and commit info availible on gitlab***
+                  
+ Prototype app and arduino code/schematic for RippleSence 
+ 
+ - https://www.nibsweb.org/2017/05/18/dit-wins-2017-business-plan-competition/
+ - https://boltontrust.ie/ripple-sense-water-level-monitor-wins-dit-student-competition-2017/
 
 
 To fully test you will need an arduino with: 
