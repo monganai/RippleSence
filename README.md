@@ -1,13 +1,6 @@
 
 
-
- mmmmm    "                  ""#            mmmm                             
- #   "# mmm    mmmm   mmmm     #     mmm   #"   "  mmm   m mm    mmm    mmm  
- #mmmm"   #    #" "#  #" "#    #    #"  #  "#mmm  #"  #  #"  #  #"  "  #"  # 
- #   "m   #    #   #  #   #    #    #""""      "# #""""  #   #  #      #"""" 
- #    " mm#mm  ##m#"  ##m#"    "mm  "#mm"  "mmm#" "#mm"  #   #  "#mm"  "#mm" 
-               #      #                                                      
-               "      "                                               
+                 
 
 ***** Migrated From https://gitlab.scss.tcd.ie/monganai/Ripple/tree/mergeBranch *****
 
